@@ -1,5 +1,5 @@
 import NotificationsButton from '@/widgets/main/NotificationsButton'
-import SearchBar from '@/widgets/main/Searchbar/icon'
+import SearchBar from '@/widgets/main/Searchbar'
 import Sidebar from '@/widgets/Sidebar/Sidebar'
 
 const AuthLayout = ({
@@ -12,8 +12,8 @@ const AuthLayout = ({
         <main className='h-full flex justify-center bg-light-bg dark:bg-dark-bg  '>
             <div className='flex w-[1440px] '>
                 <Sidebar />
-                <div className='mt-[30px] w-full pr-[30px]'>
-                    <div className='flex justify-between'>
+                <div className='overflow-auto  w-full pr-[30px]'>
+                    <div className='flex mt-[30px] justify-between'>
                         <SearchBar />
                         <NotificationsButton />
                     </div>

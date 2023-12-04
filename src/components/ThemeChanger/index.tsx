@@ -9,7 +9,7 @@ import MoonIcon from './components/MoonIcon';
 
 export enum ButtonTheme {
   CLEAR = '',
-  OUTLINE = 'cursor-pointer rounded-[20px] px-[27px] py-[17px] bg-white dark:bg-dark-bg-content dark:hover:outline hover:outline',
+  OUTLINE = 'cursor-pointer rounded-[20px] px-[27px] py-[17px] bg-white dark:bg-dark-bg-content dark:hover:outline hover:outline hover:outline-gray-text',
 }
 
 export enum IconSize {
@@ -48,9 +48,9 @@ const ThemeChanger = (props: ButtonProps) => {
   return (
     <>
       {theme !== 'light' ?
-        <SunIcon onClick={() => setTheme('light')} className={clsx([buttonTheme, `hover:bg-[#ffffff]`])} width={size} height={size} fill={darkColor} />
+        <SunIcon onClick={() => setTheme('light')} className={clsx([buttonTheme])} width={size} height={size} fill={darkColor} />
         :
-        <MoonIcon onClick={() => setTheme('dark')} className={clsx([buttonTheme, 'hover:bg-[#ffffff]'])} width={size} height={size} fill={whiteColor} />
+        <MoonIcon onClick={() => setTheme('dark')} className={clsx([buttonTheme])} width={size} height={size} fill={whiteColor} />
       }
     </ >
   )
