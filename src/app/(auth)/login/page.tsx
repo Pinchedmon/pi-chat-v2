@@ -1,6 +1,6 @@
-'use client'
+import Link from 'next/link'
 
-const Login = () => {
+const LoginPage = () => {
     return (
         <div className="flex flex-col border-[5px] rounded-3xl px-14 pt-8 pb-4 border-[#424530] bg-white dark:bg-[#2C2C2C] dark:border-[#37B34A]">
             <div className="flex justify-center">
@@ -20,17 +20,17 @@ const Login = () => {
                 className="border-[3px] mt-[20px] border-[#424530] pl-3 p-2 rounded-xl" />
 
             <div className="flex justify-center">
-                <button
-                    className="border-[3px] border-[#37B34A] mt-[20px]  pl-14 pr-14 pt-1 pb-1 font-bold rounded-xl"
+                <Link
+                    href="wall" className="border-[3px] border-[#37B34A] mt-[20px]  pl-14 pr-14 pt-1 pb-1 font-bold rounded-xl"
                 >
                     Войти
-                </button>
+                </Link>
             </div>
-            <p className="mt-[45px] underline text-center text-[#37B34A]">Зарегистрироваться</p>
+            <button className="mt-[45px] underline text-center text-[#37B34A] cursor-pointer">Зарегистрироваться</button>
 
-        </div>
+        </div >
 
     )
 }
 
-export default Login
+export default LoginPage
