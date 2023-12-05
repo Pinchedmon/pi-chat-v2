@@ -1,6 +1,7 @@
 import NotificationsButton from '@/widgets/main/NotificationsButton'
 import SearchBar from '@/widgets/main/Searchbar'
 import Sidebar from '@/widgets/Sidebar/Sidebar'
+import PostBar from './posts/components/PostBar'
 
 const AuthLayout = ({
     children,
@@ -9,7 +10,7 @@ const AuthLayout = ({
 }) => {
 
     return (
-        <main className='h-full flex justify-center bg-light-bg dark:bg-dark-bg  '>
+        <main className='w-full h-full flex justify-center bg-light-bg dark:bg-dark-bg  '>
             <div className='flex w-[1440px] '>
                 <Sidebar />
                 <div className='overflow-auto  w-full pr-[30px]'>
@@ -21,7 +22,7 @@ const AuthLayout = ({
                     {children}
                 </div>
                 <div>
-                    {/* <Addition/> */}
+                    <PostBar />
                 </div>
             </div>
 

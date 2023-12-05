@@ -1,6 +1,6 @@
 import React from 'react'
 import ProfileIcon from './components/ProfileIcon'
-import PostsWall from '@/widgets/main/PostsWall'
+import PostsWall, { PostsType } from '@/widgets/main/PostsWall'
 import EditIcon from '@/widgets/main/EditButton'
 
 const ProfilePage = () => {
@@ -29,7 +29,7 @@ const ProfilePage = () => {
             <div className='mt-[20px] w-[132px] h-[40px] flex pl-4 font-bold rounded-[20px] items-center  bg-bg-content dark:bg-dark-bg-content'>
                 Моя стена
             </div>
-            <PostsWall />
+            <PostsWall posts={[]} type={PostsType.PROFILE} />
         </div>
     )
 }
