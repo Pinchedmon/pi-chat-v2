@@ -10,7 +10,7 @@ const GroupLink = () => {
     return (
         <Link className='flex  items-center' href={'groups'}>
             <GroupIcon width={26} height={26} fill={pathname === '/groups' ? '#37B34A' : '#B5B5B5'} />
-            <p className={`ml-[12px] font-medium ${pathname === '/groups' ? 'text-[#37B34A]' : 'text-gray-text'} `}>Группы</p>
+            <p className={`ml-[12px] font-medium  `}>Группы</p>
         </Link>
     )
 }

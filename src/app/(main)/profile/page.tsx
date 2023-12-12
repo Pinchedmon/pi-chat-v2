@@ -1,7 +1,7 @@
 import React from 'react'
 import ProfileIcon from './components/ProfileIcon'
 import PostsWall, { PostsType } from '@/widgets/main/PostsWall'
-import EditIcon from '@/widgets/main/EditButton'
+import EditIcon from '@/components/EditButton'
 
 const ProfilePage = () => {
     return (

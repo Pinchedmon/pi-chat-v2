@@ -1,5 +1,5 @@
 import { post } from "@/utils/types/post"
-import EditButton from "../../EditButton"
+import EditButton from "../../../../components/EditButton"
 import CommentIcon from "./CommentIcon"
 import LikeIcon from "./LikeIcon"
 import Image from "next/image"

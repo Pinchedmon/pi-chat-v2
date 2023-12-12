@@ -10,7 +10,7 @@ const FriendsLink = () => {
     return (
         <Link className='flex  items-center' href={'friends'}>
             <FriendsIcon width={26} height={26} fill={pathname === '/friends' ? '#37B34A' : '#B5B5B5'} />
-            <p className={`ml-[12px] font-medium ${pathname === '/friends' ? 'text-[#37B34A]' : 'text-gray-text'} `}>Друзья</p>
+            <p className={`ml-[12px] font-medium `}>Друзья</p>
         </Link>
     )
 }

@@ -1,36 +1,12 @@
-'use client'
-import { useTheme } from 'next-themes'
-import Image from 'next/image'
-const Circles = () => {
-    const { theme } = useTheme();
-    return (
-        <div className='hidden md:inline-block'> <div className='absolute left-[-92px] bottom-[-77px] fill-white dark:fill-[#37B34A]'>
-            {theme === 'light' ? <Image
-                src="/circleW.svg"
-                width={297}
-                height={297}
-                alt="circle"
-            /> : <Image
-                src="/circleG.svg"
-                width={297}
-                height={297}
-                alt="circle"
-            />}
 
+const Circles = () => {
+    return (
+        <div className='hidden md:inline-block'>
+            <div className='w-[297px] h-[297px] absolute left-[-111px] bottom-[-63px] rounded-[297px] border-[8px] border-white dark:border-[#37B34A]'>
+            </div>
+            <div className='w-[297px] h-[297px] absolute right-[-148px] top-[-39px] rounded-[297px] border-[8px] border-white dark:border-[#37B34A]'>
+            </div>
         </div>
-            <div className='absolute right-[-148px] top-[-39px] fill-white dark:stroke-[#37B34A]'>
-                {theme === 'light' ? <Image
-                    src="/circleW.svg"
-                    width={297}
-                    height={297}
-                    alt="circle"
-                /> : <Image
-                    src="/circleG.svg"
-                    width={297}
-                    height={297}
-                    alt="circle"
-                />}
-            </div></div>
     )
 }
 

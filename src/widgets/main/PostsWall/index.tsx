@@ -47,7 +47,7 @@ import { post } from "@/utils/types/post";
 import { Post } from "./Components/Post";
 import clsx from "clsx";
 export const enum PostsType {
-    PROFILE = ' lg:columns-2    ',
+    PROFILE = ' lg:columns-2',
     WALL = 'wall',
     SEARCH = '',
     ONLYFRIENDS = 'onlyFriends'

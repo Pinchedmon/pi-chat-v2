@@ -10,7 +10,7 @@ const ProfileLink = () => {
     return (
         <Link className=' flex' href={'profile'}>
             <ProfileIcon width={26} height={26} fill={pathname === '/profile' ? '#37B34A' : '#B5B5B5'} />
-            <p className={`ml-[12px] font-medium  ${pathname === '/profile' ? 'text-[#37B34A]' : 'text-gray-text'}`}>Профиль</p>
+            <p className={`ml-[12px] font-medium`}>Профиль</p>
         </Link>
     )
 }

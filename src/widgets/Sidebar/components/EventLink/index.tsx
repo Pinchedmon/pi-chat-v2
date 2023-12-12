@@ -10,7 +10,7 @@ const EventLink = () => {
     return (
         <Link className='flex  items-center' href={'events'}>
             <EventIcon width={26} height={26} fill={pathname === '/events' ? '#37B34A' : '#B5B5B5'} />
-            <p className={`ml-[12px] font-medium ${pathname === '/events' ? 'text-[#37B34A]' : 'text-gray-text'} `}>Мероприятия</p>
+            <p className={`ml-[12px] font-medium `}>Мероприятия</p>
         </Link>
     )
 }

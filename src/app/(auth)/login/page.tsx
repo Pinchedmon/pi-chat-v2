@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const LoginPage = () => {
     return (
-        <div className="flex flex-col border-[5px] rounded-3xl px-14 pt-8 pb-4 border-[#424530] bg-white dark:bg-[#2C2C2C] dark:border-[#37B34A]">
+        <div className="flex flex-col border-[5px] rounded-3xl px-14 pt-8 pb-4 border-[#424530] bg-white dark:bg-[#2C2C2C] dark:border-[#5b5b5b]">
             <div className="flex justify-center">
                 <p className="border-[4px] py-2.5 px-8 text-3xl font-bold rounded-xl text-center border-[#37B34A] dark:text-white">
                     / π - Чат /

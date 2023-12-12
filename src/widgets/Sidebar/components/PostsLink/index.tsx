@@ -9,9 +9,9 @@ import HashIcon from './HashIcon'
 const PostsLink = () => {
     const pathname = usePathname()
     return (
-        <Link className='flex items-center' href={'posts'}>
+        <Link className='flex items-center' href={'posts?filter=wall'}>
             <HashIcon width={26} height={26} fill={pathname === '/posts' ? '#37B34A' : '#B5B5B5'} />
-            <p className={`ml-[12px] font-medium ${pathname === '/posts' ? 'text-[#37B34A]' : 'text-gray-text'} `}>Лента</p>
+            <p className={`ml-[12px] font-medium `}>Лента</p>
         </Link>
     )
 }
