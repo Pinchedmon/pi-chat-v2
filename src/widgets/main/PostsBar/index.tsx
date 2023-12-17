@@ -5,9 +5,8 @@ import HashLink from "./Components/HashLink"
 import FriendsLink from "./Components/FriendsLink"
 import SearchLink from "./Components/SearchLink"
 
-const PostBar = () => {
+const PostsBar = () => {
     const pathname = usePathname()
-
 
     return (
         <>
@@ -26,4 +25,4 @@ const PostBar = () => {
     )
 }
 
-export default PostBar
+export default PostsBar

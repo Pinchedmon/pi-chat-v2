@@ -1,5 +1,5 @@
 import NotificationsButton from '@/widgets/main/NotificationsButton'
-import PostBar from '@/widgets/main/PostBar'
+import PostsBar from '@/widgets/main/PostsBar'
 import SearchBar from '@/widgets/main/Searchbar'
 import Sidebar from '@/widgets/Sidebar/Sidebar'
 
@@ -12,9 +12,9 @@ const AuthLayout = ({
 
     return (
         <main className='w-full h-full flex justify-center bg-light-bg dark:bg-dark-bg  '>
-            <div className='flex w-[1440px] pr-[30px] '>
+            <div className='flex w-[1440px]  '>
                 <Sidebar />
-                <div className=' flex overflow-auto  w-full '>
+                <div className='flex overflow-auto  w-full'>
                     <div className='w-full flex flex-col'>
                         <div className='flex mt-[30px] justify-between'>
                             <SearchBar />
@@ -23,8 +23,8 @@ const AuthLayout = ({
 
                         {children}
                     </div>
-                    <div className='relative'>
-                        <PostBar />
+                    <div className='relative mr-[30px]'>
+                        <PostsBar />
                     </div>
                 </div>
 

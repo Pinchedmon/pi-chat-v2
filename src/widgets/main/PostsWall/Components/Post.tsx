@@ -38,7 +38,7 @@ export const Post: React.FC<PostProps> = (props) => {
                 </div>
             </div>
             <div className=" ">
-                <EditButton width={26} height={26} fill={"#b5b5b5"} />
+                <EditButton widthIcon={26} widthButton={42} fill={"#b5b5b5"} />
             </div>
         </div>
     )

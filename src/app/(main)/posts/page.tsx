@@ -1,9 +1,12 @@
 import PostsWall, { PostsType } from '@/widgets/main/PostsWall'
-import React from 'react'
+import SearchPostsBar from './components/SearchPostsBar'
 
 const PostsPage = () => {
     return (
-        <div><PostsWall type={PostsType.SEARCH} /></div>
+        <div>
+            <SearchPostsBar />
+            <PostsWall type={PostsType.SEARCH} />
+        </div>
     )
 }
 

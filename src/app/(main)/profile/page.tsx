@@ -24,7 +24,7 @@ const ProfilePage = () => {
                         </p>
                     </div>
                 </div>
-                <EditIcon width={26} height={26} fill={'#b5b5b5'} />
+                <EditIcon widthIcon={26} widthButton={42} fill={'#b5b5b5'} />
             </div>
             <div className='mt-[20px] w-[132px] h-[40px] flex pl-4 font-bold rounded-[20px] items-center  bg-bg-content dark:bg-dark-bg-content'>
                 Моя стена
