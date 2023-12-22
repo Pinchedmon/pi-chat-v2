@@ -6,7 +6,7 @@ import EditIcon from '@/components/EditButton'
 const ProfilePage = () => {
     return (
         <div>
-            <div className='w-full mt-[20px] h-[150px] flex flex-col-reverse rounded-[20px]  bg-bg-content dark:bg-dark-bg-content'>
+            <div className='w-full mt-[10px] h-[150px] flex flex-col-reverse rounded-[20px]  bg-bg-content dark:bg-dark-bg-content'>
                 <p className="p-3 text-[20px] font-bold">Профиль</p>
             </div>
             <div className='flex mt-[20px]'>

@@ -4,11 +4,9 @@ import MessageField from "@/widgets/main/Chat/MessageField"
 import Messages from "@/widgets/main/Chat/Messages"
 import Image from "next/image"
 
-
-
 const ChatPage = () => {
     return (
-        <div className='overflow-auto mt-[20px] w-full h-full grid grid-cols-[235px_auto] gap-[10px] grid-rows-[50px_auto] mb-[20px]'>
+        <div className='overflow-auto mt-[10px] w-full h-full grid grid-cols-[235px_auto] gap-[10px] grid-rows-[50px_auto] mb-[20px]'>
             <div className='font-bold bg-bg-content dark:bg-dark-bg-content flex items-center p-4 rounded-[20px] text-gray-text'>
                 Диалоги
             </div>
@@ -27,7 +25,6 @@ const ChatPage = () => {
                 <div className="p-6 first-letter:w-full flex flex-row-reverse">
                     <EditButton widthIcon={26} widthButton={38} fill={"#b5b5b5"} />
                 </div>
-
             </div>
             <div className=' overflow-auto bg-bg-content p-2 dark:bg-dark-bg-content rounded-[20px]'>
                 <Dialogs />

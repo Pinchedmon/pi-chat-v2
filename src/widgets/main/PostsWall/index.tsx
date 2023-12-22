@@ -62,7 +62,6 @@ const PostsWall = (props: PostsWall) => {
     return (
         <div className={clsx([props.type, "space-y-4 w-full mt-[10px] mb-[20px] "])} >
             {
-                //props.posts
                 posts.map((post: post) => (
                     <Post key={post.id} post={post} />
                 ))

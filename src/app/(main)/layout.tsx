@@ -16,7 +16,7 @@ const AuthLayout = ({
                 <Sidebar />
                 <div className='flex overflow-auto  w-full'>
                     <div className='w-full flex flex-col'>
-                        <div className='flex mt-[30px] justify-between'>
+                        <div className='flex sticky top-[30px] mt-[30px] justify-between'>
                             <SearchBar />
                             <NotificationsButton />
                         </div>
