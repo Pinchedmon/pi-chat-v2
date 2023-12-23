@@ -11,10 +11,10 @@ const AuthLayout = ({
 }) => {
 
     return (
-        <main className='w-full h-full flex justify-center bg-light-bg dark:bg-dark-bg  '>
-            <div className='flex w-[1440px]  '>
+        <main className='w-full h-full flex justify-center overflow-auto bg-light-bg dark:bg-dark-bg  '>
+            <div className='relative flex w-[1440px]  '>
                 <Sidebar />
-                <div className='flex overflow-auto  w-full'>
+                <div className='flex  w-full'>
                     <div className='w-full flex flex-col'>
                         <div className='flex sticky top-[30px] mt-[30px] justify-between'>
                             <SearchBar />

@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation'
 const ChatLink = () => {
     const pathname = usePathname()
     return (
-        <Link className='flex  items-center' href={'chat'}>
+        <Link className='flex hover:outline outline-[1px] hover:rounded-xl outline-gray-text  outline-offset-[5px] items-center' href={'chat'}>
             <MessageIcon width={26} height={26} fill={pathname === '/chat' ? '#37B34A' : '#B5B5B5'} />
             <p className={`ml-[12px] font-medium`}>Сообщения</p>
         </Link>

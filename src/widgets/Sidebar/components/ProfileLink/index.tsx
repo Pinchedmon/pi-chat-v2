@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation'
 const ProfileLink = () => {
     const pathname = usePathname()
     return (
-        <Link className=' flex' href={'profile'}>
+        <Link className='outline-[1px] flex hover:outline hover:rounded-xl outline-gray-text  outline-offset-[5px]' href={'profile'}>
             <ProfileIcon width={26} height={26} fill={pathname === '/profile' ? '#37B34A' : '#B5B5B5'} />
             <p className={`ml-[12px] font-medium`}>Профиль</p>
         </Link>

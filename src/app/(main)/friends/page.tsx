@@ -28,7 +28,7 @@ const Friend = ({ props }: { props: GroupProps }) => {
                 </div>
             </div>
             <div className="flex items-center mr-4  ">
-                <p className=" border  px-2  py-2 rounded-[20px] border-green text-[14px]">Написать сообщение</p>
+                <p className=" border  px-4  py-2 rounded-[20px] border-green text-[14px]">Написать сообщение</p>
             </div>
             <div className="flex items-center  ">
                 <EditButton widthIcon={26} widthButton={42} fill={"#b5b5b5"} />
