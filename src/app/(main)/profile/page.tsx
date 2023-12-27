@@ -2,6 +2,7 @@ import React from 'react'
 import ProfileIcon from './components/ProfileIcon'
 import PostsWall, { PostsType } from '@/widgets/main/PostsWall'
 import EditIcon from '@/components/EditButton'
+import { EditOption } from '@/utils/types/editButton'
 
 const ProfilePage = () => {
     return (
@@ -24,7 +25,7 @@ const ProfilePage = () => {
                         </p>
                     </div>
                 </div>
-                <EditIcon widthIcon={26} widthButton={42} fill={'#b5b5b5'} />
+                <EditIcon widthIcon={26} widthButton={42} fill={'#b5b5b5'} option={EditOption.PROFILE} />
             </div>
             <div className='mt-[20px] w-[132px] h-[40px] flex pl-4 font-bold rounded-[20px] items-center  bg-bg-content dark:bg-dark-bg-content'>
                 Моя стена

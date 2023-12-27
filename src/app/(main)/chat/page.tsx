@@ -1,4 +1,5 @@
 import EditButton from "@/components/EditButton"
+import { EditOption } from "@/utils/types/editButton"
 import Dialogs from "@/widgets/main/Chat/Dialogs"
 import MessageField from "@/widgets/main/Chat/MessageField"
 import Messages from "@/widgets/main/Chat/Messages"
@@ -10,7 +11,7 @@ const ChatPage = () => {
             <div className='font-bold bg-bg-content dark:bg-dark-bg-content flex items-center p-4 rounded-[20px] text-gray-text'>
                 Диалоги
             </div>
-            <div className='pl-4 flex items-center bg-bg-content dark:bg-dark-bg-content rounded-[20px]'>
+            <div className='z-10 pl-4 flex items-center bg-bg-content dark:bg-dark-bg-content rounded-[20px]'>
                 <Image
                     src={"/assets/profileIcon.png"}
                     alt={""}
@@ -22,18 +23,17 @@ const ChatPage = () => {
                     <p className="ml-[14px] text-[12px] text-gray-text mb-[2px] font-medium">был в сети столько времени назад
                     </p>
                 </div>
-                <div className="p-6 first-letter:w-full flex flex-row-reverse">
-                    <EditButton widthIcon={26} widthButton={38} fill={"#b5b5b5"} />
+                <div className="p-6 flex flex-row-reverse">
+                    <EditButton widthIcon={26} widthButton={38} fill={"#b5b5b5"} option={EditOption.DIALOG} />
                 </div>
             </div>
-            <div className=' overflow-auto bg-bg-content p-2 dark:bg-dark-bg-content rounded-[20px]'>
+            <div className='z-0 overflow-auto bg-bg-content p-2 dark:bg-dark-bg-content rounded-[20px]'>
                 <Dialogs />
             </div>
             <div className='relative overflow-auto p-4 border-4 border-bg-content dark:border-dark-bg-content rounded-[20px]'>
                 <Messages />
                 <MessageField />
             </div>
-
         </div>
     )
 }

@@ -2,6 +2,7 @@
 
 
 import EditButton from "@/components/EditButton";
+import { EditOption } from "@/utils/types/editButton";
 import Image from "next/image";
 
 interface GroupProps {
@@ -31,7 +32,7 @@ const Friend = ({ props }: { props: GroupProps }) => {
                 <p className=" border  px-4  py-2 rounded-[20px] border-green text-[14px]">Написать сообщение</p>
             </div>
             <div className="flex items-center  ">
-                <EditButton widthIcon={26} widthButton={42} fill={"#b5b5b5"} />
+                <EditButton widthIcon={26} widthButton={42} fill={"#b5b5b5"} option={EditOption.FRIEND} />
             </div>
         </div>)
 }
