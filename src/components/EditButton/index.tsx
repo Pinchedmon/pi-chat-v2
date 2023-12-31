@@ -53,7 +53,7 @@ const dialogEdit = (
 
 
 const postEdit = (
-    <div className="absolute right-0 pl-4  ">
+    <div className="absolute z-0 right-0 pl-4  ">
         <div className="p-1 bg-white border-gray-text rounded-[20px]  dark:bg-dark-bg">
             <div className="flex p-2 gap-4 text-[14px] items-center ">
                 <svg className='fill-black dark:fill-white' xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox={`0 0 ${18} ${18}`} fill="none">
@@ -116,7 +116,7 @@ const EditButton = (props: svgProps) => {
     const { option, widthIcon, widthButton, fill } = props
     return (
         <div onMouseOver={handleMouseOver}
-            onMouseOut={handleMouseOut} className="z-0 relative">
+            onMouseOut={handleMouseOut} className="z-10 relative">
             <div
                 onMouseOver={handleMouseOver}
                 onMouseOut={handleMouseOut}

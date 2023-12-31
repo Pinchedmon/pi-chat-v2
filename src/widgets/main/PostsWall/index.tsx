@@ -60,7 +60,7 @@ export interface PostsWall {
 
 const PostsWall = (props: PostsWall) => {
     return (
-        <div className={clsx([props.type, "space-y-4 w-full mt-[10px] mb-[20px] "])} >
+        <div className={clsx([props.type, "z-0 space-y-4 w-full mt-[10px] mb-[20px] "])} >
             {
                 posts.map((post: post) => (
                     <Post key={post.id} post={post} />

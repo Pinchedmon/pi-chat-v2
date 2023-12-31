@@ -7,7 +7,7 @@ const SearchPostsBar = () => {
     const searchParams = useSearchParams()
 
     return (
-        <>
+        <div className="z-40">
             {searchParams.get('filter') === 'search' ? <div className="mt-[12px] rounded-[20px] p-3 flex bg-bg-content dark:bg-dark-bg-content">
                 <input className="bg-white dark:bg-dark-bg-content border border-gray-text mr-[12px] rounded-[20px] px-4" placeholder="поиск" />
                 <button className="cursor-pointer flex border items-center bg-white dark:bg-dark-bg-content justify-center rounded-[20px] border-green w-[40px] h-[40px] hover:border-gray-text">
@@ -17,7 +17,7 @@ const SearchPostsBar = () => {
                 </button>
             </div> : <></>}
 
-        </>
+        </div>
     )
 }
 
