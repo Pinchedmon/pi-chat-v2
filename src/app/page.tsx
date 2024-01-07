@@ -1,4 +1,4 @@
-import ThemeChanger from '@/components/ThemeChanger'
+import ThemeChanger from '@/utils/ThemeChanger'
 import { redirect } from 'next/navigation';
 
 // import Image from 'next/image'

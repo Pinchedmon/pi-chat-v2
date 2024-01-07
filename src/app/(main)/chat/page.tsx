@@ -1,4 +1,4 @@
-import EditButton from "@/components/EditButton"
+import EditButton from "@/utils/EditButton"
 import { EditOption } from "@/utils/types/editButton"
 import Dialogs from "@/widgets/main/Chat/Dialogs"
 import MessageField from "@/widgets/main/Chat/MessageField"

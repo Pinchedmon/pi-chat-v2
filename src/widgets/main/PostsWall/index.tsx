@@ -43,8 +43,9 @@ const posts: post[] = [
         imageUrl: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg'
     },
 ]
+import { Post } from "@/components/Post";
 import { post } from "@/utils/types/post";
-import { Post } from "./Components/Post";
+
 import clsx from "clsx";
 export const enum PostsType {
     PROFILE = ' lg:columns-2',

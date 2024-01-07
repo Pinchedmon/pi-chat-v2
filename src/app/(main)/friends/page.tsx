@@ -1,7 +1,7 @@
 
 
 
-import EditButton from "@/components/EditButton";
+import EditButton from "@/utils/EditButton";
 import { EditOption } from "@/utils/types/editButton";
 import Image from "next/image";
 

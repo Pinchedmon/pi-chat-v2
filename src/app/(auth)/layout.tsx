@@ -1,4 +1,4 @@
-import ThemeChanger from '@/components/ThemeChanger'
+import ThemeChanger from '@/utils/ThemeChanger'
 import Circles from './components/circles'
 
 

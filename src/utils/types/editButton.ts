@@ -4,4 +4,5 @@ export const enum EditOption {
     DIALOG = 'dialog',
     FRIEND = 'friend',
     GROUP = 'group',
+    COMMENT ='comment'
 }

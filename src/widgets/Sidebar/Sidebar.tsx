@@ -1,4 +1,4 @@
-import ThemeChanger from "@/components/ThemeChanger"
+import ThemeChanger from "@/utils/ThemeChanger"
 import ChatLink from "./components/ChatLink"
 import EventLink from "./components/EventLink"
 import FriendsLink from "./components/FriendsLink"
