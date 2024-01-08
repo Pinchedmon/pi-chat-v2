@@ -1,6 +1,7 @@
 import EditButton from "@/utils/EditButton";
 import { EditOption } from "@/utils/types/editButton";
 import Image from "next/image";
+import Link from "next/link";
 
 interface GroupProps {
     id: number;
@@ -11,7 +12,7 @@ interface GroupProps {
 const Group = ({ props }: { props: GroupProps }) => {
     return (
         <div className="mb-4  flex  w-full rounded-[20px] px-4 pt-4 pb-4 bg-bg-content dark:bg-dark-bg-content ">
-            <div className="grow flex cursor-pointer">
+            <Link href={`group?id=${props.id}`} className="grow flex cursor-pointer">
                 <div className="mr-4 ">
                     <Image src={props.avatar} alt={"avatar"} width={50} height={50} style={{ borderRadius: '10px' }} />
                 </div>
@@ -24,7 +25,7 @@ const Group = ({ props }: { props: GroupProps }) => {
                     </p>
 
                 </div>
-            </div>
+            </Link>
             <div className="flex items-center">
                 <EditButton widthIcon={26} widthButton={42} fill={"#b5b5b5"} option={EditOption.GROUP} />
             </div>

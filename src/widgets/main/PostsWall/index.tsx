@@ -50,6 +50,7 @@ import clsx from "clsx";
 export const enum PostsType {
     PROFILE = ' lg:columns-2',
     WALL = 'wall',
+    GROUP = 'lg:columns-2',
     SEARCH = '',
     ONLYFRIENDS = 'onlyFriends'
 }

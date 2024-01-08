@@ -31,12 +31,14 @@ const PersonalForm = (
         <input
             placeholder="Имя"
             className="border-[2px] mt-[32px] border-[#b5b5b5] pl-3 p-2 rounded-xl" />
+
         <input
-            className="mt-[12px] rounded-xl"
+            className="w-[250px] mt-[12px] flex rounded-xl"
             type="file"
             name="myImage"
-
+            placeholder=""
         />
+
         <div className="flex justify-center">
             <Link
                 href="posts?filter=wall" className="border-[2px] border-[#37B34A] mt-[20px]  mx-4 pl-6 pr-6 pt-1 pb-1 font-bold rounded-xl"
@@ -47,8 +49,6 @@ const PersonalForm = (
     </form >
 )
 const SignupPage = () => {
-
-
     return (
         <div className="flex flex-col border-[3px] rounded-3xl px-14 pt-8 pb-4 border-[#424530] bg-white dark:bg-[#2C2C2C] dark:border-[#5b5b5b]">
             <div className="flex justify-center">

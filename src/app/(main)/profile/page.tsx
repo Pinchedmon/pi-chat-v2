@@ -1,5 +1,5 @@
-import React from 'react'
-import ProfileIcon from './components/ProfileIcon'
+
+import ProfileIcon from '../../../components/ProfileIcon'
 import PostsWall, { PostsType } from '@/widgets/main/PostsWall'
 import EditIcon from '@/utils/EditButton'
 import { EditOption } from '@/utils/types/editButton'

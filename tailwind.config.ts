@@ -4,6 +4,7 @@ const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/utils/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/widgets/**/*.{js,ts,jsx,tsx,mdx}',
   ],
@@ -16,7 +17,6 @@ const config: Config = {
         'bg-content':'#FFFFFF',
         'gray-text':'#B5B5B5',
         'green':'#37B34A',
-        
       }
     },
   },

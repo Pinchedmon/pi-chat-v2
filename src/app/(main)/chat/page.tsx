@@ -1,7 +1,7 @@
+import Chatarea from "@/utils/Chatarea"
 import EditButton from "@/utils/EditButton"
 import { EditOption } from "@/utils/types/editButton"
 import Dialogs from "@/widgets/main/Chat/Dialogs"
-import MessageField from "@/widgets/main/Chat/MessageField"
 import Messages from "@/widgets/main/Chat/Messages"
 import Image from "next/image"
 
@@ -32,9 +32,11 @@ const ChatPage = () => {
             </div>
             <div className='relative overflow-auto p-4 border-4 border-bg-content dark:border-dark-bg-content rounded-[20px]'>
                 <Messages />
-                <MessageField />
+                <div className=" sticky bottom-0 p-2">
+                    <Chatarea />
+                </div>
             </div>
-        </div>
+        </div >
     )
 }
 
