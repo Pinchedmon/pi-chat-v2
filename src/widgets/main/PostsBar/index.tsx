@@ -15,7 +15,9 @@ const PostsBar = () => {
                     <div className='flex  flex-col  gap-[32px] mt-[22px]  mb-[24px]  '>
                         <HashLink />
                         <SearchLink />
-                        <FriendsLink />
+                        <div className="mx-[30px]">
+                            <FriendsLink />
+                        </div>
                     </div>
                 </div>
                 : <></>}

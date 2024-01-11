@@ -1,17 +1,19 @@
 import ThemeChanger from "@/utils/ThemeChanger"
-import ChatLink from "./components/ChatLink"
-import EventLink from "./components/EventLink"
-import FriendsLink from "./components/FriendsLink"
-import GroupLink from "./components/GroupLink"
-import PostsLink from "./components/PostsLink"
-import ProfileLink from "./components/ProfileLink"
-import LogoutButton from "./components/Logout"
+
 import { memo } from "react"
 import Link from "next/link"
+import ProfileLink from "@/utils/Links/ProfileLink"
+import ChatLink from "@/utils/Links/ChatLink"
+import EventLink from "@/utils/Links/EventLink"
+import GroupLink from "@/utils/Links/GroupLink"
+import LogoutButton from "@/utils/Links/Logout"
+import PostsLink from "@/utils/Links/PostsLink"
+import FriendsLink from "@/utils/Links/FriendsLink"
+
 
 const Sidebar = () => {
     return (
-        <div className="flex flex-col   h-full" >
+        <div className="hidden  md:flex flex-col   h-full" >
             <div className="w-[188px] mx-[30px] sticky top-[16px] ">
                 <div className='flex   flex-col dark:bg-dark-bg-content bg-bg-content rounded-[20px] '>
                     <div className='mt-[14px]  border-black flex justify-center'>
