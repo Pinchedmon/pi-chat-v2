@@ -10,8 +10,10 @@ type PostProps = {
     post: post
 }
 export const Post: React.FC<PostProps> = (props) => {
+
     return (
-        <div className="  flex  w-full rounded-[20px] px-4 pt-4 pb-4 bg-bg-content dark:bg-dark-bg-content ">
+
+        <div className="  flex  w-full rounded-[20px] px-2 md:px-4 py-2 md:py-4 bg-bg-content dark:bg-dark-bg-content ">
             <PostAuthorImage image={props.post.avatar} />
             <div className="flex grow flex-col" >
                 <PostAuthor tag={props.post.tag} author={props.post.author} />

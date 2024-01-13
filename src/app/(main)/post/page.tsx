@@ -1,10 +1,12 @@
 import { Post } from "@/components/Post"
 import Comment from "@/components/Comment"
 import Textarea from "@/utils/Chatarea"
+import PreviousButton from "@/utils/PreviousButton"
 
 const PostPage = () => {
     return (
         <div className="mt-[10px]">
+            <PreviousButton href="posts?filter=wall" />
             <Post post={{
                 id: 1,
                 content: 'Текст, небольшой',

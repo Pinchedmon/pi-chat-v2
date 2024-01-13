@@ -12,11 +12,11 @@ const PostButtons = (props: Props) => {
         <div className="mt-[10px] flex gap-[14px]">
             <div className="flex cursor-pointer gap-[8px]">
                 <LikeIcon width={24} height={24} fill={"#b5b5b5"} />
-                <p className="font-normal text-gray-text">{props.likes}</p>
+                <p className="font-normal text-gray-text text-[14px] md:text-[16px]">{props.likes}</p>
             </div>
             <div className="flex cursor-pointer gap-[10px]">
                 <CommentIcon width={24} height={24} fill={"#b5b5b5"} />
-                <p className="font-normal text-gray-text">{props.comments}</p>
+                <p className="font-normal text-gray-text text-[14px] md:text-[16px]">{props.comments}</p>
             </div>
         </div>
     )

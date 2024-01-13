@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import React from 'react'
+
 import EventIcon from './EventIcon'
 import { usePathname } from 'next/navigation'
 

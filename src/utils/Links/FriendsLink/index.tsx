@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import React from 'react'
+
 import FriendsIcon from './FriendsIcon'
 import { usePathname } from 'next/navigation'
 

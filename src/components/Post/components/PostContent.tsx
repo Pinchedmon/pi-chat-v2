@@ -11,7 +11,7 @@ interface Props {
 const PostContent = (props: Props) => {
     return (
         <Link href={`post?id=${props.id}`}>
-            <p className="mt-[6px]">
+            <p className="mt-[6px] text-[14px] md:text-[16px]">
                 {props.content}
             </p>
             {props.image &&
@@ -19,7 +19,6 @@ const PostContent = (props: Props) => {
                     <Image src={props.image} alt={""} width={200} height={200} />
                 </div>}
         </Link>
-
     )
 }
 

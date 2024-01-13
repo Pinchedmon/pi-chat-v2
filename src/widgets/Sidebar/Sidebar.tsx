@@ -1,6 +1,6 @@
 import ThemeChanger from "@/utils/ThemeChanger"
 
-import { memo } from "react"
+
 import Link from "next/link"
 import ProfileLink from "@/utils/Links/ProfileLink"
 import ChatLink from "@/utils/Links/ChatLink"
@@ -9,6 +9,7 @@ import GroupLink from "@/utils/Links/GroupLink"
 import LogoutButton from "@/utils/Links/Logout"
 import PostsLink from "@/utils/Links/PostsLink"
 import FriendsLink from "@/utils/Links/FriendsLink"
+import { memo } from "react"
 
 
 const Sidebar = () => {
