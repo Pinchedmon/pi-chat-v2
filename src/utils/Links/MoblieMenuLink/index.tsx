@@ -17,7 +17,7 @@ const MobileMenuLink = () => {
                     // pathname === '/posts' ? '#37B34A' :
                     '#B5B5B5'}
             />
-            <p className={`md:ml-[12px] font-medium `}>Меню</p>
+            <p className={` md:ml-[12px] font-medium `}>Меню</p>
         </button>
     )
 }

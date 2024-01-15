@@ -29,6 +29,16 @@ const PostPage = () => {
 
                 }} />
                 <Comment comment={{
+                    id: 1,
+                    content: "Кажется твой пост не любят бро",
+                    author: "Антон",
+                    tag: "Антонио",
+                    publishedAt: new Date(),
+                    avatar: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg',
+
+                }} />
+
+                <Comment comment={{
                     id: 2,
                     content: "Мяу",
                     author: "Маркет",

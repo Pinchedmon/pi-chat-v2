@@ -16,7 +16,7 @@ const AuthLayout = ({
         <main className='w-screen h-screen flex justify-center overflow-auto bg-light-bg dark:bg-dark-bg  '>
             <div className='flex-col md:flex-row relative flex w-[1440px]  '>
                 <Sidebar />
-                <div className='flex  w-full'>
+                <div className='flex pb-[70px] md:pb-[0px] w-full'>
                     <div className='w-full flex flex-col'>
                         <div className='flex z-50 sticky mt-[7px] top-[7px] md:top-[30px] md:mt-[30px] justify-between'>
                             <SearchBar />

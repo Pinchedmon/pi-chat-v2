@@ -6,7 +6,7 @@ import ProfileLink from "@/utils/Links/ProfileLink"
 
 const MobileSidebar = () => {
     return (
-        <div className="fixed w-screen bg-white dark:bg-dark-bg-content  rounded-t-[20px] justify-between px-[30px] py-4 flex bottom-0 md:hidden">
+        <div className="fixed w-screen bg-white dark:bg-dark-bg-content  rounded-t-[20px] justify-between px-[30px] py-2 flex bottom-0 md:hidden">
             <MobileMenuLink />
             <PostsLink />
             <ChatLink />

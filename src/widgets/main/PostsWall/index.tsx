@@ -47,6 +47,7 @@ import { Post } from "@/components/Post";
 import { post } from "@/utils/types/post";
 
 import clsx from "clsx";
+import { memo } from "react";
 export const enum PostsType {
     PROFILE = ' lg:columns-2',
     WALL = 'wall',
@@ -70,6 +71,7 @@ const PostsWall = (props: PostsWall) => {
             }
         </div >
     )
+
 }
 
-export default PostsWall
+export default memo(PostsWall)
