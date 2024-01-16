@@ -1,41 +1,21 @@
-import Chatarea from "@/utils/Chatarea"
-import EditButton from "@/utils/EditButton"
-import { EditOption } from "@/utils/types/editButton"
+'use client'
 import Dialogs from "@/widgets/main/Chat/Dialogs"
-import Messages from "@/widgets/main/Chat/Messages"
-import Image from "next/image"
+import SelectedDialog from "./components/SelectedDialog"
+import Chat from "./components/Chat"
+import { useSearchParams } from "next/navigation"
 
 const ChatPage = () => {
+    const id = useSearchParams().get('id');
     return (
-        <div className='overflow-auto mt-[10px] w-full h-full grid grid-cols-[235px_auto] gap-[10px] grid-rows-[50px_auto] mb-[20px]'>
-            <div className='font-bold bg-bg-content dark:bg-dark-bg-content flex items-center p-4 rounded-[20px] text-gray-text'>
+        <div className='overflow-auto mt-[10px] w-full h-full flex flex-col md:grid  grid-cols-[235px_auto] gap-[10px] grid-rows-[50px_auto] mb-[20px]'>
+            <div className={`${id && 'hidden md:block'} font-bold bg-bg-content dark:bg-dark-bg-content flex items-center p-4 rounded-[20px] text-gray-text`}>
                 Диалоги
             </div>
-            <div className='z-10 pl-4 flex items-center bg-bg-content dark:bg-dark-bg-content rounded-[20px]'>
-                <Image
-                    src={"/assets/profileIcon.png"}
-                    alt={""}
-                    width={32}
-                    height={32}
-                    style={{ borderRadius: '20px' }} />
-                <div className="flex w-full items-end">
-                    <p className="ml-[12px] text-[16px] font-bold">Pinchedmon</p>
-                    <p className="ml-[14px] text-[12px] text-gray-text mb-[2px] font-medium">был в сети столько времени назад
-                    </p>
-                </div>
-                <div className="p-6 flex flex-row-reverse">
-                    <EditButton widthIcon={26} widthButton={38} fill={"#b5b5b5"} option={EditOption.DIALOG} />
-                </div>
-            </div>
-            <div className='z-0 overflow-auto bg-bg-content p-2 dark:bg-dark-bg-content rounded-[20px]'>
+            <SelectedDialog />
+            <div className={`${id && 'hidden md:block'} z-0 overflow-auto bg-bg-content p-2 dark:bg-dark-bg-content rounded-[20px]`}>
                 <Dialogs />
             </div>
-            <div className='relative overflow-auto p-4 border-4 border-bg-content dark:border-dark-bg-content rounded-[20px]'>
-                <Messages />
-                <div className=" sticky bottom-0 p-2">
-                    <Chatarea />
-                </div>
-            </div>
+            <Chat />
         </div >
     )
 }

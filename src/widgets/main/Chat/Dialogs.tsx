@@ -1,13 +1,11 @@
 import { dialog } from "@/utils/types/dialog";
 import Image from "next/image";
 import moment from "moment";
-interface DialogsProps {
+import Link from "next/link";
 
-}
 const Dialog = (props: { props: dialog }) => {
     return (
-        <div className="flex hover:outline p-2 w-full outline-gray-text outline-[1px] rounded-[20px]">
-
+        <Link className="flex hover:outline  hover:outline-[1px] p-2 w-full outline-gray-text outline-[1px] rounded-[20px]" href={`chat?id=${props.props.userId}`}        >
             <div className="flex items-center mr-2">
                 <Image src={props.props.imageUrl as string} alt={"avatar"} width={40} height={40} style={{ borderRadius: '50px' }} />
             </div>
@@ -24,8 +22,7 @@ const Dialog = (props: { props: dialog }) => {
                     {moment(props.props.date).format("HH:mm")}
                 </p>
             </div>
-
-        </div>
+        </Link>
     )
 }
 const Dialogs = () => {
