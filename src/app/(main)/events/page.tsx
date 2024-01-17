@@ -14,7 +14,7 @@ const EventsPage = () => {
                         Посмотреть все
                     </button>
                 </div>
-                <div className="flex  gap-4 overflow-x-auto ">
+                <div className="flex flex-col gap-4 overflow-x-auto ">
                     <Event props={{ id: 1, title: 'Приглашение на квест', descr: "The most powerfull event, where u can see", avatar: 'https://i.pinimg.com/564x/70/23/12/702312fc8a652717239781260bf09809.jpg' }} />
 
                     <Event props={{ id: 2, title: 'Приглашение на квест', descr: "The most powerfull event, where u can see", avatar: 'https://i.pinimg.com/564x/70/23/12/702312fc8a652717239781260bf09809.jpg' }} />
@@ -25,9 +25,9 @@ const EventsPage = () => {
                     Все
                 </p>
             </div>
-            <div className="flex gap-4">
-                <Event props={{ id: 3, title: 'Название группы Название группы Название группы', descr: "Описание", avatar: 'https://i.pinimg.com/564x/70/23/12/702312fc8a652717239781260bf09809.jpg' }} />
-                <Event props={{ id: 4, title: 'Название группы', descr: "ОписаниеНазвание группыНазвание группы", avatar: 'https://i.pinimg.com/564x/70/23/12/702312fc8a652717239781260bf09809.jpg' }} />
+            <div className="flex flex-col gap-4">
+                {/* <Event props={{ id: 3, title: 'Название группы Название группы Название группы', descr: "Описание", avatar: 'https://i.pinimg.com/564x/70/23/12/702312fc8a652717239781260bf09809.jpg' }} />
+                <Event props={{ id: 4, title: 'Название группы', descr: "ОписаниеНазвание группыНазвание группы", avatar: 'https://i.pinimg.com/564x/70/23/12/702312fc8a652717239781260bf09809.jpg' }} /> */}
             </div>
         </div>
     )

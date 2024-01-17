@@ -4,8 +4,8 @@ import moment from "moment"
 import { event } from "@/utils/types/event"
 const Event = ({ props }: { props: event }) => {
     return (
-        <div className="p-4 w-[500px] flex  bg-bg-content dark:bg-dark-bg-content rounded-[20px]">
-            <div className=" w-[140px] h-[140px] relative mr-4">
+        <div className="p-4 md:w-[500px] flex  bg-bg-content dark:bg-dark-bg-content rounded-[20px]">
+            <div className=" w-[140px] md:h-[140px] relative mr-4">
                 <Image src={props.avatar} alt={"avatar"} fill style={{ borderRadius: '20px' }} />
             </div>
             <div className="text-wrap flex grow flex-col">
