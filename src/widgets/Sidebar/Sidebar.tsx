@@ -1,6 +1,5 @@
 import ThemeChanger from "@/utils/ThemeChanger"
 
-
 import Link from "next/link"
 import ProfileLink from "@/utils/Links/ProfileLink"
 import ChatLink from "@/utils/Links/ChatLink"
@@ -14,8 +13,8 @@ import { memo } from "react"
 
 const Sidebar = () => {
     return (
-        <div className="hidden  md:flex flex-col   h-full" >
-            <div className="w-[188px] mx-[30px] sticky top-[16px] ">
+        <nav className="hidden  md:flex flex-col   h-full" >
+            <section className="w-[188px] mx-[30px] sticky top-[16px] ">
                 <div className='flex   flex-col dark:bg-dark-bg-content bg-bg-content rounded-[20px] '>
                     <div className='mt-[14px]  border-black flex justify-center'>
                         <Link href='/posts?filter=wall' className='border-2 px-[23px] py-[4px] text-[#424530] font-bold text-[20px] border-[#37B34A] rounded-[30px] dark:text-white' >
@@ -35,10 +34,10 @@ const Sidebar = () => {
                     <ThemeChanger />
                     <LogoutButton />
                 </div>
-            </div>
+            </section>
 
 
-        </div>
+        </nav>
     )
 }
 

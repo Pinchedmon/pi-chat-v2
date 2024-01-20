@@ -48,7 +48,7 @@ const Message = ({ props }: { props: message }) => {
 }
 const Messages = () => {
     return (
-        <div className="overflow-auto w-full flex flex-col gap-4">
+        <div className="overflow-auto w-full flex flex-col gap-4 p-4">
             <Message props={{
                 id: 0,
                 content: "Тексты текста текст321321312312",

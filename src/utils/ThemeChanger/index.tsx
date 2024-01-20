@@ -9,7 +9,7 @@ import MoonIcon from './components/MoonIcon';
 
 export enum ButtonTheme {
   CLEAR = '',
-  OUTLINE = 'cursor-pointer rounded-[20px]  px-[27px] py-[17px] bg-white dark:bg-dark-bg-content dark:hover:outline hover:outline hover:outline-[2px]  hover:outline-gray-text',
+  OUTLINE = 'cursor-pointer rounded-[20px] border-2 md:border-0  px-[27px] py-[17px] bg-white dark:bg-dark-bg-content dark:hover:outline hover:outline hover:outline-[2px]  hover:outline-gray-text',
 }
 
 export enum IconSize {
@@ -33,8 +33,7 @@ const ThemeChanger = (props: ButtonProps) => {
     size = IconSize.L,
     whiteColor = '#B5B5B5',
     darkColor = '#B5B5B5',
-    hoverWColor = '#000000',
-    hoverDColor = '#000000'
+
 
   } = props;
   const { theme, setTheme } = useTheme()

@@ -6,7 +6,7 @@ import { EditOption } from '@/utils/types/editButton'
 
 const ProfilePage = () => {
     return (
-        <div>
+        <section>
             <div className='w-full mt-[10px] h-[150px] flex flex-col-reverse rounded-[20px]  bg-bg-content dark:bg-dark-bg-content'>
                 <p className="p-3 text-[20px] font-bold">Профиль</p>
             </div>
@@ -41,7 +41,7 @@ const ProfilePage = () => {
                 Моя стена
             </div>
             <PostsWall posts={[]} type={PostsType.PROFILE} />
-        </div>
+        </section>
     )
 }
 

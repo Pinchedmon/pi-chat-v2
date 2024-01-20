@@ -13,11 +13,11 @@ const AuthLayout = ({
 }) => {
 
     return (
-        <main className='w-screen h-screen flex justify-center overflow-auto bg-light-bg dark:bg-dark-bg  '>
-            <div className='flex-col md:flex-row relative flex w-[1440px]  '>
+        <main className='w-screen h-screen flex justify-center overflow-y-auto bg-light-bg dark:bg-dark-bg  '>
+            <div className='flex-col  md:flex-row relative flex  w-[1440px]'>
                 <Sidebar />
-                <div className='flex pb-[70px] md:pb-[0px] w-full'>
-                    <div className='w-full flex flex-col'>
+                <div className='flex  pb-[70px] md:pb-[0px] w-full'>
+                    <div className='w-full  flex flex-col'>
                         <div className='flex z-50 sticky mt-[7px] top-[7px] md:top-[30px] md:mt-[30px] justify-between'>
                             <SearchBar />
                             <MobileHeader />
@@ -25,9 +25,7 @@ const AuthLayout = ({
                         </div>
                         {children}
                     </div>
-                    <div className='hidden md:block relative mr-[30px]'>
-                        <PostsBar />
-                    </div>
+                    <PostsBar />
                 </div>
                 <MobileSidebar />
             </div>

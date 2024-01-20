@@ -11,13 +11,13 @@ const PostsPage = () => {
         filter === null && redirect('posts?filter=wall')
     }, [filter])
     return (
-        <div>
+        <section>
             {filter !== null &&
                 <>
                     <SearchPostsBar />
                     <PostsWall type={PostsType.SEARCH} />
                 </>}
-        </div>
+        </section>
     )
 }
 

@@ -7,7 +7,7 @@ interface CommentProps {
 }
 const Comment = (props: CommentProps) => {
     return (
-        <div className="mt-[7px] md:mt-[10px] flex  w-full rounded-[50px] px-4 py-2 first-letter:md:py-4 bg-bg-content dark:bg-dark-bg-content ">
+        <article className="mt-[7px] md:mt-[10px] flex  w-full rounded-[50px] px-4 py-2 first-letter:md:py-4 bg-bg-content dark:bg-dark-bg-content ">
             <div className="mr-4 ">
                 <Image src={props.comment.avatar} alt={"avatar"} width={50} height={50} style={{ borderRadius: '50px' }} />
             </div>
@@ -25,7 +25,7 @@ const Comment = (props: CommentProps) => {
             <div className="">
                 <EditButton option={EditOption.COMMENT} widthIcon={26} widthButton={42} fill={"#b5b5b5"} />
             </div>
-        </div>
+        </article>
     )
 }
 

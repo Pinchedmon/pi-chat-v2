@@ -6,11 +6,11 @@ interface CommentsProps {
 
 const Comments = (props: CommentsProps) => {
     return (
-        <div>{
+        <section>{
             props.comments.map((comment: comment) => (
                 <Comment key={comment.id} comment={comment} />
             ))
-        }</div>
+        }</section>
     )
 }
 

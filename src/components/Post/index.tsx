@@ -13,7 +13,7 @@ export const Post: React.FC<PostProps> = (props) => {
 
     return (
 
-        <div className="  flex  w-full rounded-[20px] px-2 md:px-4 py-2 md:py-4 bg-bg-content dark:bg-dark-bg-content ">
+        <article className="  flex  w-full rounded-[20px] px-2 md:px-4 py-2 md:py-4 bg-bg-content dark:bg-dark-bg-content ">
             <PostAuthorImage image={props.post.avatar} />
             <div className="flex grow flex-col" >
                 <PostAuthor tag={props.post.tag} author={props.post.author} />
@@ -23,6 +23,6 @@ export const Post: React.FC<PostProps> = (props) => {
             <div className=" ">
                 <EditButton option={EditOption.POST} widthIcon={26} widthButton={42} fill={"#b5b5b5"} />
             </div>
-        </div>
+        </article>
     )
 }
