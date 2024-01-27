@@ -9,8 +9,8 @@ const AuthLayout = ({
 }) => {
 
     return (
-        <div className='overflow-hidden h-screen relative bg-[#37B34A] dark:bg-[#1F1E1F]'>
-            <div className='absolute left-[40px] top-[40px]'>
+        <div className='overflow-auto h-screen relative bg-[#37B34A] dark:bg-[#1F1E1F]'>
+            <div className='absolute left-[40px] top-[40px]' >
                 <ThemeChanger />
             </div>
             <div>
@@ -24,7 +24,7 @@ const AuthLayout = ({
                 {children}
             </div>
 
-        </div>
+        </div >
     )
 }
 

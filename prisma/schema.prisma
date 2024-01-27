@@ -1,0 +1,112 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model User {
+  id        Int       @id @default(autoincrement())
+  username  String   
+  tag       String    @unique
+  password  String
+  avatar    String?
+  posts     Post[]
+  friends   Int[]    
+  chats     Chat[]    @relation("UserChat")
+  messages  Message[] 
+  groups    Group[]   @relation("Membership")
+  profile   Profile?
+  events    Event[]   @relation("EventParticipant")
+  comments  Comment[]  @relation("UserComments")
+  likes     Like[]
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  title     String
+  content   String
+  img       String?
+  createdAt DateTime  @default(now())
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId    Int
+  groupId     Int?
+  group       Group?   @relation(fields: [groupId], references: [id])
+  eventId     Int?
+  event       Event?   @relation(fields: [eventId], references: [id])
+  comments    Comment[]  @relation("PostComments")
+  likes     Int[]
+}
+
+model Like {
+  id          Int           @default(autoincrement()) @id
+  userId      Int
+  user        User          @relation(fields: [userId], references: [id])
+  subjectId   Int
+  subject     SubjectList
+}
+
+enum SubjectList {
+  Post
+  Comment
+}
+
+model Comment {
+  id        Int     @id @default(autoincrement())
+  content   String
+  img       String
+  author    User    @relation("UserComments", fields: [authorId], references: [id])
+  authorId  Int
+  post      Post    @relation("PostComments", fields: [postId], references: [id])
+  postId    Int
+  likes     Int[]
+}
+
+model Chat {
+  id        Int        @id @default(autoincrement())
+  name      String?
+  img       String?
+  messages  Message[]
+  participants User[] @relation("UserChat")
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  content    String
+  img       String?
+  createdAt  DateTime @default(now())
+  chat       Chat     @relation(fields: [chatId], references: [id])
+  chatId     Int
+  sender     User     @relation(fields: [senderId], references: [id])
+  senderId   Int
+}
+
+model Profile {
+  id        Int      @id @default(autoincrement())
+  bio       String?
+  backImage String?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      @unique
+}
+
+model Event {
+  id           Int      @id @default(autoincrement())
+  name         String
+  img          String
+  description  String
+  date         DateTime
+  participants User[]   @relation("EventParticipant")
+  location     String?
+  posts        Post[]
+}
+
+model Group {
+  id          Int     @id @default(autoincrement())
+  name        String
+  img         String?
+  description String?
+  posts       Post[]
+  members     User[]  @relation("Membership")
+}
