@@ -1,7 +1,9 @@
 'use client'
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
 
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import toast, { Toaster } from 'react-hot-toast';
 interface IFormInput {
     password: string
     tag: string
@@ -10,9 +12,19 @@ interface IFormInput {
 const SigninForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
     const router = useRouter();
-    const onSubmit = () => {
-        router.push('posts?filter=wall');
-    }
+    const onSubmit: SubmitHandler<IFormInput> = async (data: IFormInput) => {
+        const login = await signIn('credentials', {
+            tag: data.tag,
+            password: data.password,
+            callbackUrl: '/',
+            redirect: false,
+        })
+        if (login?.error) {
+            console.log(login.error)
+        } else {
+            toast.error('Ошибка');
+        }
+    };
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
             {errors.tag && <p className='mb-2 text-red-500 text-sm'>{errors.tag.message}</p>}
@@ -40,7 +52,7 @@ const SigninForm = () => {
             >
                 Войти
             </button>
-
+            <Toaster />
 
         </form>
     )

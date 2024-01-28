@@ -1,11 +1,23 @@
 import {db} from '@/lib/db';
 import { NextResponse } from "next/server";
 import { hash } from 'bcrypt';
+import * as z from 'zod';
 
+const userSchema = z
+    .object({
+        username: z.string().min(3, 'Username is required').max(16),
+        tag: z.string().min(3, 'Username is required').max(16),
+        password: z
+            .string()
+            .min(1, 'Password is required')
+            .min(6, 'Password must have than 8 characters'),
+        avatar: z
+            .string().optional() 
+    });
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const {username, password, tag}  = body;
+        const {username, password, tag}  = userSchema.parse(body);
         
         // check if tag alreadyh exists
         const existingUserByTag = await db.user.findUnique({

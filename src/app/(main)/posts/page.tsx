@@ -4,6 +4,7 @@ import SearchPostsBar from './components/SearchPostsBar'
 import { redirect, useSearchParams } from 'next/navigation'
 import { useLayoutEffect } from 'react'
 
+
 const PostsPage = () => {
     const searchParams = useSearchParams()
     const filter = searchParams.get('filter')

@@ -1,5 +1,4 @@
 'use client'
-
 import SigninForm from '@/components/forms/SigninForm';
 import { useRouter } from 'next/navigation'
 
@@ -17,7 +16,7 @@ const SigninPage = () => {
             </p>
             <SigninForm />
             <button
-                onClick={() => router.push('signup')}
+                onClick={() => router.push('/signup')}
                 className="mt-[45px] underline text-center text-[#37B34A] cursor-pointer">Зарегистрироваться</button>
         </section >
 

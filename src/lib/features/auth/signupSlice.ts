@@ -31,8 +31,8 @@ export const signupSlice = createSlice({
   initialState,
   reducers: {
     setWelcomeForm: (state, action: PayloadAction<IWelcomeForm>)  => {
-        state.tag = action.payload.tag;
-        state.password = action.payload.password;
+         state.tag = action.payload.tag;
+         state.password = action.payload.password;
     },
     setFinishForm: (state, action: PayloadAction<IFinishForm>)  => {
         state.img = action.payload.img;
@@ -42,7 +42,7 @@ export const signupSlice = createSlice({
   }
 })
 
-export const {  } = signupSlice.actions
+export const {setWelcomeForm, setFinishForm  } = signupSlice.actions
 
 
 

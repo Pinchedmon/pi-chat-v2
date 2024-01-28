@@ -1,5 +1,9 @@
+import { setFinishForm } from '@/lib/features/auth/signupSlice';
+import { useAppDispatch, useAppSelector, } from '@/lib/hooks';
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface IFormInput {
     username: string
@@ -7,21 +11,44 @@ interface IFormInput {
 }
 
 const SignupFinishForm = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
-    const router = useRouter();
-    const onSubmit = () => {
-        router.push('posts?filter=wall');
+    const { register, handleSubmit, formState: { errors }, getValues } = useForm<IFormInput>();
+    const dispatch = useAppDispatch();
+    const signup = useAppSelector(state => state.signup)
+    const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) => {
+        dispatch(setFinishForm(data))
     }
+    const router = useRouter();
+    const postData = async () => {
+        const response = await axios.post('/api/user', {
+            username: signup.username,
+            password: signup.password,
+            tag: signup.tag,
+            avatar: signup.img,
+        });
+
+        if (response.status === 201) {
+            router.push('signin');
+        } else {
+            console.log('Reg failed');
+        }
+    }
+    useEffect(() => {
+        if (signup.username !== '' && signup.username == getValues('username')) {
+            postData()
+        }
+    }, [signup, router]);
+
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <p className="text-center text-xl  font-bold mt-[1н8px]">
+            <p className="text-center text-xl  font-bold mb-[32px]">
                 Ваши данные
             </p>
             {errors.username && <p className='mb-2 text-red-500 text-sm'>{errors.username.message}</p>}
             <input
                 placeholder="Тэг"
                 id="username"
-                className="border-[2px] mt-[32px] border-[#b5b5b5] pl-3 p-2 rounded-xl"
+                className="border-[2px]  border-[#b5b5b5] pl-3 p-2 rounded-xl"
                 {...register('username', {
                     required: 'Не заполнено',
                     minLength: { value: 3, message: 'Мин. длина 6 символов' },

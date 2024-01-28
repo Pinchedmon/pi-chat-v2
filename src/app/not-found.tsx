@@ -21,7 +21,7 @@ export default function NotFound() {
                         </p>
                     </div>
                     <p className="mt-4 text-center text-lg">Страницы по данному  url-адресу  нет</p>
-                    <Link className='mt-4 font-semibold hover:border-gray-text border-green border-2 rounded-[20px] px-4 py-2' href='signin'>
+                    <Link className='mt-4 font-semibold hover:border-gray-text border-green border-2 rounded-[20px] px-4 py-2' href='/signin'>
                         Войти на главную
                     </Link>
                 </div>

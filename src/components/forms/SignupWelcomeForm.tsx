@@ -1,5 +1,7 @@
 'use client'
-import { useForm } from 'react-hook-form';
+import { setWelcomeForm } from '@/lib/features/auth/signupSlice';
+import { useAppDispatch } from '@/lib/hooks';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface IFormInput {
     tag: string
@@ -12,8 +14,10 @@ interface Props {
 }
 const SignupWelcomeForm = (props: Props) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<IFormInput>();
-    const onSubmit = () => {
+    const dispatch = useAppDispatch()
+    const onSubmit: SubmitHandler<IFormInput> = (data) => {
         props.onSwitch();
+        dispatch(setWelcomeForm(data))
     }
     return (
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
