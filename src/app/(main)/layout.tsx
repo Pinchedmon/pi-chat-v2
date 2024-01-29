@@ -4,15 +4,20 @@ import SearchBar from '@/widgets/main/Searchbar'
 import MobileHeader from '@/widgets/mobile/MobileHeader'
 import MobileSidebar from '@/widgets/mobile/MobileSidebar'
 import Sidebar from '@/widgets/Sidebar/Sidebar'
+import { getSession, useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
+import { useEffect } from 'react'
 
 
-const AuthLayout = ({
+const AuthLayout = async ({
     children,
 }: {
     children: React.ReactNode
 }) => {
 
+
     return (
+
         <main className='w-screen h-screen flex justify-center overflow-y-auto bg-light-bg dark:bg-dark-bg  '>
             <div className='flex-col  md:flex-row relative flex  w-[1440px]'>
                 <Sidebar />

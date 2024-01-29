@@ -4,6 +4,8 @@ import './globals.css'
 import { ThemeProvider } from '@/context/themeProvider'
 import StoreProvider from './StoreProvider'
 
+import Provider from '@/components/ui/Provider'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +24,9 @@ export default function RootLayout({
       <body className={`${inter.className} h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
           <StoreProvider>
-            {children}
+            <Provider>
+              {children}
+            </Provider>
           </StoreProvider>
         </ThemeProvider>
       </body>

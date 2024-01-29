@@ -36,6 +36,7 @@ const SignupWelcomeForm = (props: Props) => {
             <input
                 placeholder="Пароль"
                 id="password"
+                type="password"
                 className={`${errors.password && 'placeholder:text-red-500 text-red-500'} border-[2px] border-[#b5b5b5] pl-3 p-2 mb-[20px] rounded-xl`}
                 {...register('password', {
                     required: 'Пароль обязателен',
@@ -47,6 +48,7 @@ const SignupWelcomeForm = (props: Props) => {
             <input
                 placeholder="Повторный пароль"
                 id="secPassword"
+                type="password"
                 className={`${errors.secPassword && 'placeholder:text-red-500 text-red-500'} border-[2px] mb-[20px] border-[#b5b5b5] pl-3 p-2 rounded-xl`}
                 {...register('secPassword', {
                     required: 'Повторите пароль',

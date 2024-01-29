@@ -1,5 +1,8 @@
+
+
 import ThemeChanger from '@/utils/ThemeChanger'
 import Circles from './components/circles'
+
 
 
 const AuthLayout = ({
@@ -9,6 +12,7 @@ const AuthLayout = ({
 }) => {
 
     return (
+
         <div className='overflow-hidden h-screen relative bg-[#37B34A] dark:bg-[#1F1E1F]'>
             <div className='absolute left-[40px] top-[40px]' >
                 <ThemeChanger />
@@ -25,6 +29,7 @@ const AuthLayout = ({
             </div>
 
         </div >
+
     )
 }
 
