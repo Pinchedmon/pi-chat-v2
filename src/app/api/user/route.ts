@@ -35,6 +35,11 @@ export async function POST(req: Request) {
                 password: hashedPassword
             }
         })
+         await db.profile.create({
+            data: {
+              userId: newUser.id,
+            },
+          });
         const {password: newUserPassword, ...rest} = newUser;
         return NextResponse.json({user: rest, message: "User created successfully"}, {status: 201});
     } catch (err) {

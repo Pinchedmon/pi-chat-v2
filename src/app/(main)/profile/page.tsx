@@ -1,12 +1,62 @@
-
+'use client'
 import ProfileIcon from '../../../components/ProfileIcon'
 import PostsWall, { PostsType } from '@/widgets/main/PostsWall'
 import EditIcon from '@/utils/EditButton'
 import { EditOption } from '@/utils/types/editButton'
+import useSWR from 'swr'
+import { useEffect, useLayoutEffect, useState } from 'react'
+import { getSession, useSession } from 'next-auth/react'
+import axios from 'axios'
+import { useSearchParams } from 'next/navigation'
+import ProfileTag from '@/components/profile/ProfileTag'
+import { RequestInfo } from 'undici-types'
+type Iprofile = {
+    backImage: string
+    bio: string
+    id: string
+    tag: string
+    userId: string
+    username: string
+}
 
-const ProfilePage = () => {
+const fetcher = async (url: string, init?: RequestInit) => fetch(url, init).then(res => res.json());
+
+
+const ProfilePage = (props: any) => {
+    // const session = useSession();
+
+    const id = useSearchParams().get('id');
+    const { data, error } = useSWR(`/api/profile/${id}`, fetcher);
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    if (!data) {
+        return <div>Loading...</div>;
+    }
+
+    // const [data, setData] = useState<Iprofile>();
+    // const [isHave, setIsHave] = useState(false)
+
+
+    // useEffect(() => {
+    //     if (session.status !== 'loading') {
+    //         axios.get(`/api/profile/${id}`).then(res => {
+    //             setData(res.data)
+    //             setIsHave(true)
+    //         }
+    //         )
+
+    //     }
+    // }
+    //     , [id, session.status]);
+
+
     return (
-        <section>
+
+
+        <div>
             <div className='w-full mt-[10px] h-[150px] flex flex-col-reverse rounded-[20px]  bg-bg-content dark:bg-dark-bg-content'>
                 <p className="p-3 text-[20px] font-bold">Профиль</p>
             </div>
@@ -14,15 +64,13 @@ const ProfilePage = () => {
                 <ProfileIcon />
                 <div className='flex grow md:grow-0 flex-col md:mx-[20px] justify-between'>
                     <div className='rounded-[20px] md:w-[340px] h-[76px] md:h-[91px]  font-medium  bg-bg-content dark:bg-dark-bg-content'>
-                        <p className='w-full text-[12px] md:text-[16px] p-4'> Немного о себе</p>
+                        <p className='w-full text-[12px] md:text-[16px] p-4'>{data.profile.bio}</p>
                     </div>
                     <div className='rounded-[20px] gap-[10px] flex items-center p-2 md:p-4 mt-[10px] md:w-[340px] md:h-[50px] bg-bg-content dark:bg-dark-bg-content'>
                         <p className='font-bold text-[14px] md:text-[20px]'>
-                            Pinchedmon
+                            {data.profile.username}
                         </p>
-                        <p className='font-medium text-[10px] md:text-[12px] text-gray-text'>
-                            @pinchedmon
-                        </p>
+                        <ProfileTag tag={data.profile.tag} />
                     </div>
                 </div>
 
@@ -41,7 +89,8 @@ const ProfilePage = () => {
                 Моя стена
             </div>
             <PostsWall posts={[]} type={PostsType.PROFILE} />
-        </section>
+        </div>
+
     )
 }
 

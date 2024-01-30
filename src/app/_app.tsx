@@ -3,6 +3,7 @@ import StoreProvider from "./StoreProvider";
 import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
+
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <StoreProvider>

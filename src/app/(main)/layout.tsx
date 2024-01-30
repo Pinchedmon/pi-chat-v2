@@ -1,20 +1,17 @@
+import RequireAuth from '@/lib/RequireAuth'
 import NotificationsButton from '@/widgets/main/NotificationsButton'
 import PostsBar from '@/widgets/main/PostsBar'
 import SearchBar from '@/widgets/main/Searchbar'
 import MobileHeader from '@/widgets/mobile/MobileHeader'
 import MobileSidebar from '@/widgets/mobile/MobileSidebar'
 import Sidebar from '@/widgets/Sidebar/Sidebar'
-import { getSession, useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
-import { useEffect } from 'react'
 
 
-const AuthLayout = async ({
+const AuthLayout = ({
     children,
 }: {
     children: React.ReactNode
 }) => {
-
 
     return (
 
@@ -28,7 +25,9 @@ const AuthLayout = async ({
                             <MobileHeader />
                             <NotificationsButton />
                         </div>
-                        {children}
+                        <RequireAuth>
+                            {children}
+                        </RequireAuth>
                     </div>
                     <PostsBar />
                 </div>

@@ -8,9 +8,9 @@ import { useRouter } from 'next/navigation'
 
 const LogoutButton = () => {
     const router = useRouter()
-    useEffect(() => {
-        axios.get('/api').then(res => (!res.data.authenticated && router.push('/signin')))
-    }, [])
+    // useEffect(() => {
+    //     axios.get('/api').then(res => (!res.data.authenticated && router.push('/signin')))
+    // }, [])
 
     return (
         <button
