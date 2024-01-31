@@ -26,9 +26,7 @@ export async function GET(req: NextApiRequest, route: { params: { id: string } }
       return NextResponse.json({ profile: null, message: "User with this tag already exists" }, { status: 409 });
     }
 
-    const response = { ...profile, username: user.username, tag: user.tag };
-
-    return NextResponse.json({ profile: response}, { status: 200 });
+    return NextResponse.json({ profile: profile, user: {username: user.username, tag: user.tag}}, { status: 200 });
   } catch (err) {
     console.error(err);
     return NextResponse.json({ message: "Something went wrong!" }, { status: 500 });
