@@ -1,11 +1,14 @@
 export type post = {
     id: number;
     content: string;
-    author: string;
-    tag: string;
+    author: {
+        tag: string;
+        username: string;
+        avatar: string;
+        id: string;
+    }
     publishedAt: Date;
     likes: number;
     comments: number;
-    avatar: string;
     imageUrl?: string | undefined;
 }

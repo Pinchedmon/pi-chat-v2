@@ -13,7 +13,7 @@ import { memo } from "react"
 
 const Sidebar = () => {
     return (
-        <nav className="hidden  md:flex flex-col   h-full" >
+        <nav className="hidden  md:flex flex-col h-full" >
             <section className="w-[188px] mx-[30px] sticky top-[16px] ">
                 <div className='flex   flex-col dark:bg-dark-bg-content bg-bg-content rounded-[20px] '>
                     <div className='mt-[14px]  border-black flex justify-center'>
@@ -35,8 +35,6 @@ const Sidebar = () => {
                     <LogoutButton />
                 </div>
             </section>
-
-
         </nav>
     )
 }

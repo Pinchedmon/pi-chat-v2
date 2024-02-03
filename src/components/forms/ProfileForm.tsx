@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+
 
 interface IFormInput {
     bio: string;

@@ -21,7 +21,6 @@ export async function POST(req: Request) {
               avatar: image ? image : existingUser.avatar,
             },
         })
-        console.log(bio ? bio : existingProfile.bio);
         await db.profile.update({
             where: { userId: parseInt(userId) },
             data: {

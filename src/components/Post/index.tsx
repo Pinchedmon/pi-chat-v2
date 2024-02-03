@@ -8,21 +8,25 @@ import PostContent from "./components/PostContent"
 import PostButtons from "./components/PostButtons"
 type PostProps = {
     post: post
+    userId: number | string;
+
 }
 export const Post: React.FC<PostProps> = (props) => {
-
+    const { post, userId } = props
     return (
 
         <article className="  flex  w-full rounded-[20px] px-2 md:px-4 py-2 md:py-4 bg-bg-content dark:bg-dark-bg-content ">
-            <PostAuthorImage image={props.post.avatar} />
+            <PostAuthorImage image={post.author.avatar} />
             <div className="flex grow flex-col" >
-                <PostAuthor tag={props.post.tag} author={props.post.author} />
-                <PostContent content={props.post.content} image={props.post.imageUrl} id={props.post.id} />
-                <PostButtons likes={props.post.likes} comments={props.post.comments} />
+                <PostAuthor tag={post.author.tag} author={post.author.username} userId={post.author.id} />
+                <PostContent content={post.content} image={post.imageUrl} id={post.id} />
+                <PostButtons likes={post.likes} comments={post.comments} />
             </div>
-            <div className=" ">
-                <EditButton option={EditOption.POST} widthIcon={26} widthButton={42} fill={"#b5b5b5"} />
-            </div>
+            {userId == post.author.id &&
+                <div className=" ">
+                    <EditButton option={EditOption.POST} widthIcon={26} widthButton={42} fill={"#b5b5b5"} id={post.id} />
+                </div>
+            }
         </article>
     )
 }
