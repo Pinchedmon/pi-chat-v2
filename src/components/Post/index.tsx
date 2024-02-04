@@ -20,7 +20,7 @@ export const Post: React.FC<PostProps> = (props) => {
             <div className="flex grow flex-col" >
                 <PostAuthor tag={post.author.tag} author={post.author.username} userId={post.author.id} />
                 <PostContent content={post.content} image={post.imageUrl} id={post.id} />
-                <PostButtons likes={post.likes} comments={post.comments} />
+                <PostButtons likes={post.likes} comments={post.comments} id={post.id} userId={userId} />
             </div>
             {userId == post.author.id &&
                 <div className=" ">

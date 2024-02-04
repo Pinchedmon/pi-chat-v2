@@ -9,7 +9,7 @@ const PostEdit = (props: { id: number | undefined }) => {
             data: {
                 id: props.id
             }
-        }).then(res => mutate(`/api/post/${session.data?.user.id}`))
+        }).then(res => mutate(`/api/posts/${session.data?.user.id}`))
         console.log(props.id)
     }
     return (

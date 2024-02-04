@@ -37,33 +37,37 @@ const ProfilePage = () => {
         mutate({ profile: { ...data.profile, profileData }, user: { ...data.user, userData } })
     }
     return (
-        <div>
-            <Modal isOpen={isModalOpen} onClose={closeModal}>
-                <ProfileForm id={id} mutate={mutateData} />
-            </Modal>
-            <div className='bg-cover bg-center w-full mt-[10px] h-[150px] flex flex-col-reverse rounded-[20px]  bg-bg-content dark:bg-dark-bg-content'
-                style={{ backgroundImage: `url(${data.profile.backImage})` }}>
-                <p className="p-3 text-[20px] font-bold">Профиль</p>
-            </div>
-            <div className='flex mt-[10px] md:mt-[20px]'>
-                <ProfileIcon img={data.user?.img} />
-                <div className='flex grow md:grow-0 flex-col md:mx-[20px] justify-between'>
-                    <ProfileBio bio={data.profile.bio} />
-                    <div className='rounded-[20px] gap-[10px] flex items-center p-2 md:p-4 mt-[10px] md:w-[340px] md:h-[50px] bg-bg-content dark:bg-dark-bg-content'>
-                        <ProfileUsername username={data.user.username} />
-                        <ProfileTag tag={data.user.tag} />
-                    </div>
-                </div>
-                <EditIcon openModal={openModal} widthIcon={26} widthButton={42} fill={'#b5b5b5'} option={session.data?.user.id !== id ? EditOption.PROFILE : EditOption.MYPROFILE} />
-            </div>
-            {
-                session.data?.user.id !== id && <AddFriendButton />
-            }
 
-            <div className='ml-2 md:ml-0 text-[16px] md:text-[16px] mt-[20px] w-[132px] h-[40px] flex pl-4 font-bold rounded-[20px] items-center  bg-bg-content dark:bg-dark-bg-content'>
-                Моя стена
-            </div>
-            {/* <PostsWall posts={[]} type={PostsType.PROFILE} /> */}
+        <div>
+            {data &&
+                <>
+                    <Modal isOpen={isModalOpen} onClose={closeModal}>
+                        <ProfileForm id={id} mutate={mutateData} />
+                    </Modal>
+                    <div className='bg-cover bg-center w-full mt-[10px] h-[150px] flex flex-col-reverse rounded-[20px]  bg-bg-content dark:bg-dark-bg-content'
+                        style={{ backgroundImage: data.profile?.backgroundImage ? `url(${data.profile.backImage})` : '' }}>
+                        <p className="p-3 text-[20px] font-bold">Профиль</p>
+                    </div>
+                    <div className='flex mt-[10px] md:mt-[20px]'>
+                        <ProfileIcon img={data.user?.img} />
+                        <div className='flex grow md:grow-0 flex-col md:mx-[20px] justify-between'>
+                            <ProfileBio bio={data.profile.bio} />
+                            <div className='rounded-[20px] gap-[10px] flex items-center p-2 md:p-4 mt-[10px] md:w-[340px] md:h-[50px] bg-bg-content dark:bg-dark-bg-content'>
+                                <ProfileUsername username={data.user.username} />
+                                <ProfileTag tag={data.user.tag} />
+                            </div>
+                        </div>
+                        <EditIcon openModal={openModal} widthIcon={26} widthButton={42} fill={'#b5b5b5'} option={session.data?.user.id !== id ? EditOption.PROFILE : EditOption.MYPROFILE} />
+                    </div>
+                    {
+                        session.data?.user.id !== id && <AddFriendButton />
+                    }
+
+                    <div className='ml-2 md:ml-0 text-[16px] md:text-[16px] mt-[20px] w-[132px] h-[40px] flex pl-4 font-bold rounded-[20px] items-center  bg-bg-content dark:bg-dark-bg-content'>
+                        Моя стена
+                    </div>
+                    {/* <PostsWall posts={[]} type={PostsType.PROFILE} /> */}
+                </>}
         </div>
 
     )

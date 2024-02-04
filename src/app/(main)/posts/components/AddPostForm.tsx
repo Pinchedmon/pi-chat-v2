@@ -9,7 +9,6 @@ const AddPostForm = (props: { id: string }) => {
     const searchParams = useSearchParams()
     const { mutate } = useSWRConfig();
     const [content, setContent] = useState('');
-
     const handleSend = async () => {
         if (!content || !props.id) {
             return;
@@ -17,8 +16,7 @@ const AddPostForm = (props: { id: string }) => {
         await axios.post('/api/post/add', {
             authorId: props.id,
             content: content
-        }).then(res => res.status == 201 && mutate(`/api/post/${props.id}`, fetcher(`/api/post/${props.id}`)))
-
+        }).then(res => res.status == 201 && mutate(`/api/posts/${props.id}`, fetcher(`/api/posts/${props.id}`)))
     }
     return (
         <div className="">

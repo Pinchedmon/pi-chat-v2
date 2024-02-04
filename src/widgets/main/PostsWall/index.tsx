@@ -20,8 +20,8 @@ export interface PostsWall {
 }
 
 const PostsWall = (props: PostsWall) => {
-    const { data, mutate, error } = useSWR(`/api/post/${props.id}`, fetcher);
-
+    const { data, error } = useSWR(`/api/posts/${props.id}`, fetcher);
+    console.log(data)
     return (
         <div className={clsx([props.type, "z-0 space-y-4 w-full mt-[10px] mb-[20px] "])} >
             {
