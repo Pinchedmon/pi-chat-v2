@@ -1,9 +1,14 @@
 export type comment = {
     id: number;
     content: string;
-    author: string;
-    tag: string;
+    author: {
+        tag: string;
+        username: string;
+        avatar: string;
+        id: string;
+    }
+ 
     publishedAt: Date;
-    avatar: string;
+
 
 }

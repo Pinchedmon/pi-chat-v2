@@ -51,7 +51,7 @@ model PostLike {
 model Comment {
   id        Int     @id @default(autoincrement())
   content   String
-  img       String
+  img       String?
   author    User    @relation("UserComments", fields: [authorId], references: [id])
   authorId  Int
   post      Post    @relation("PostComments", fields: [postId], references: [id])

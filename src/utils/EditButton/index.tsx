@@ -46,7 +46,7 @@ const EditButton = (props: svgProps) => {
                     {option === EditOption.POST && <PostEdit id={id} />}
                     {option === EditOption.PROFILE && <ProfileEdit />}
                     {option === EditOption.MYPROFILE && <MyProfileEdit openModal={openModal as () => void} />}
-                    {option === EditOption.COMMENT && <CommentEdit />}
+                    {option === EditOption.COMMENT && <CommentEdit id={id} />}
                     {option === EditOption.DIALOG && <DialogEdit />}
                     {option === EditOption.FRIEND && <FriendEdit />}
                     {option === EditOption.GROUP && <GroupEdit />}

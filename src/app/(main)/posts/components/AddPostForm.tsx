@@ -16,7 +16,12 @@ const AddPostForm = (props: { id: string }) => {
         await axios.post('/api/post/add', {
             authorId: props.id,
             content: content
-        }).then(res => res.status == 201 && mutate(`/api/posts/${props.id}`, fetcher(`/api/posts/${props.id}`)))
+        }).then(res => {
+            if (res.status == 201) {
+                mutate(`/api/posts/${props.id}`, fetcher(`/api/posts/${props.id}`))
+                setContent('')
+            }
+        })
     }
     return (
         <div className="">

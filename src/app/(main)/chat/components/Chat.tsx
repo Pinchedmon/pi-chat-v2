@@ -1,4 +1,4 @@
-import Chatarea from "@/utils/Chatarea"
+import Chatarea from "@/utils/SendMessageArea"
 import Messages from "@/widgets/main/Chat/Messages"
 import { useSearchParams } from "next/navigation";
 

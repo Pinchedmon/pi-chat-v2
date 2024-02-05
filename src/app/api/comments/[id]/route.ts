@@ -17,8 +17,8 @@ export async function GET(req: NextApiRequest, route: { params: { id: string } }
         return NextResponse.json({ message: "User not found" }, { status: 404 });
       }   
 
-      const getPostsWithLikeCounts = async () => {
-        const posts = await db.post.findMany({
+      const getCommentsWithLikeCounts = async () => {
+        const comments = await db.comment.findMany({
           select: {
             id: true,
             content: true,
@@ -33,30 +33,26 @@ export async function GET(req: NextApiRequest, route: { params: { id: string } }
           },
         });
       
-        const postsWithLikeCounts = await Promise.all(
-          posts.map(async (post) => {
-            const likeCount = await db.postLike.count({
+        const commentsWithLikeCounts = await Promise.all(
+          comments.map(async (comment) => {
+            const likeCount = await db.commentLike.count({
               where: {
-                postId: post.id,
+                commentId: comment.id,
               },
             });
-            const commentCount = await db.comment.count({
-              where: {
-                postId: post.id,
-              },
-            });
-            return { ...post, likes: likeCount, comments: commentCount };
+      
+            return { ...comment, likes: likeCount };
           })
         );
       
-        return postsWithLikeCounts;
+        return commentsWithLikeCounts;
       };
-      const posts = await getPostsWithLikeCounts();
-    if (!posts) {
-      return NextResponse.json({ posts: null, message: "Posts with this tag already exists" }, { status: 409 });
+      const comments = await getCommentsWithLikeCounts();
+    if (!comments) {
+      return NextResponse.json({ comments: null, message: "Posts with this tag already exists" }, { status: 409 });
     }
 
-    return NextResponse.json({ posts: posts,}, { status: 200 });
+    return NextResponse.json({ comments: comments}, { status: 200 });
   } catch (err) {
     console.error(err);
     return NextResponse.json({ message: "Something went wrong!" }, { status: 500 });
