@@ -24,7 +24,7 @@ export const Post: React.FC<PostProps> = (props) => {
             </div>
             {userId == post.author.id &&
                 <div className=" ">
-                    <EditButton option={EditOption.POST} widthIcon={26} widthButton={42} fill={"#b5b5b5"} id={post.id} />
+                    <EditButton option={EditOption.POST} widthIcon={26} widthButton={42} fill={"#b5b5b5"} id={post.id} data={{ content: post.content, img: post.imageUrl }} />
                 </div>
             }
         </article>

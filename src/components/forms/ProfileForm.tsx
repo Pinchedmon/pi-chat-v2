@@ -70,8 +70,6 @@ const ProfileForm = (props: { id: string, mutate: (profileData: any, userData: a
             >
                 Изменить
             </button>
-
-
         </form>
     )
 }

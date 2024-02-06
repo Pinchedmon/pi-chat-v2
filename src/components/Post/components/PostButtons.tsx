@@ -4,6 +4,7 @@ import CommentIcon from "@/utils/CommentButton/CommentIcon"
 import LikeIcon from "@/utils/LikeButton/LikeIcon"
 import axios from "axios";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSWRConfig } from "swr";
 
 interface Props {
@@ -19,7 +20,7 @@ const PostButtons = (props: Props) => {
         await axios.post(`/api/post/like`, { postId: id, userId: userId })
             .then(response => {
                 mutate(`/api/posts/${userId}`);
-                mutate(`/api/post/${userId}`);
+                mutate(`/api/post/${id}`);
             })
     }
     return (

@@ -9,6 +9,8 @@ import DialogEdit from "./Edits/DialogEdit";
 import PostEdit from "./Edits/PostEdit";
 import GroupEdit from "./Edits/GroupEdit";
 import FriendEdit from "./Edits/FriendEdit";
+import Modal from "@/components/ui/Modal";
+import useModal from "@/hooks/useModal";
 
 interface svgProps {
     option?: EditOption;
@@ -17,6 +19,7 @@ interface svgProps {
     fill: string;
     openModal?: () => void;
     id?: number;
+    data?: any;
 }
 
 const EditButton = (props: svgProps) => {
@@ -29,7 +32,7 @@ const EditButton = (props: svgProps) => {
     const handleMouseOut = () => {
         setIsHovering(false);
     };
-    const { option, widthIcon, widthButton, fill, openModal, id } = props
+    const { option, widthIcon, widthButton, fill, openModal, id, data } = props
     return (
         <section onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut} className={`z-10 relative w-[${widthButton}px] h-[${widthButton}px]`}>
@@ -43,7 +46,8 @@ const EditButton = (props: svgProps) => {
             </div>
             {isHovering &&
                 <>
-                    {option === EditOption.POST && <PostEdit id={id} />}
+                    {option === EditOption.POST && <PostEdit id={id} data={
+                        data} />}
                     {option === EditOption.PROFILE && <ProfileEdit />}
                     {option === EditOption.MYPROFILE && <MyProfileEdit openModal={openModal as () => void} />}
                     {option === EditOption.COMMENT && <CommentEdit id={id} />}
@@ -54,7 +58,6 @@ const EditButton = (props: svgProps) => {
                 </>
             }
         </section>
-
     )
 }
 

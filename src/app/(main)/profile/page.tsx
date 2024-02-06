@@ -1,6 +1,5 @@
 'use client'
 import ProfileIcon from '../../../components/ProfileIcon'
-import PostsWall, { PostsType } from '@/widgets/main/PostsWall'
 import EditIcon from '@/utils/EditButton'
 import { EditOption } from '@/utils/types/editButton'
 import useSWR from 'swr'
@@ -8,7 +7,6 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import ProfileTag from '@/components/profile/ProfileTag'
 import { fetcher } from '@/lib/fetcher'
 import { useSession } from 'next-auth/react'
-import { useState } from 'react'
 import Modal from '@/components/ui/Modal'
 import ProfileForm from '@/components/forms/ProfileForm'
 import useModal from '@/hooks/useModal'
@@ -16,14 +14,12 @@ import ProfileUsername from '@/components/profile/ProfileUsername'
 import AddFriendButton from '@/components/profile/AddFriendButton'
 import ProfileBio from '@/components/profile/ProfileBio'
 
-
 const ProfilePage = () => {
     const { isModalOpen, openModal, closeModal } = useModal();
     const session = useSession();
     const router = useRouter()
     const id = useSearchParams().get('id');
     const { data, mutate, error } = useSWR(`/api/profile/${id}`, fetcher);
-    console.log(data)
     if (error) {
         return <div>Error: {error.message}</div>;
     }
