@@ -1,5 +1,5 @@
-import EditButton from "@/utils/EditButton"
-import PreviousButton from "@/utils/PreviousButton"
+import EditButton from "@/components/buttons/EditButton"
+import PreviousButton from "@/components/buttons/PreviousButton"
 import { EditOption } from "@/utils/types/editButton"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"

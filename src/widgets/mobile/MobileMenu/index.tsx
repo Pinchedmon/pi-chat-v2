@@ -1,9 +1,9 @@
 'use client';
 
-import EventLink from "@/utils/Links/EventLink";
-import FriendsLink from "@/utils/Links/FriendsLink";
-import GroupLink from "@/utils/Links/GroupLink";
-import LogoutButton from "@/utils/Links/Logout";
+import EventLink from "@/components/links/EventLink";
+import FriendsLink from "@/components/links/FriendsLink";
+import GroupLink from "@/components/links/GroupLink";
+import LogoutButton from "@/utils/Logout";
 import ThemeChanger from "@/utils/ThemeChanger";
 
 interface Props {

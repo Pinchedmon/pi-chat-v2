@@ -1,5 +1,5 @@
-import ProfileIcon from "@/components/ProfileIcon"
-import EditButton from "@/utils/EditButton"
+import ProfileIcon from "@/app/(main)/profile/components/ProfileIcon"
+import EditButton from "@/components/buttons/EditButton"
 import { EditOption } from "@/utils/types/editButton"
 import PostsWall, { PostsType } from "@/widgets/main/PostsWall"
 

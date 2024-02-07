@@ -1,13 +1,13 @@
 import ThemeChanger from "@/utils/ThemeChanger"
 
 import Link from "next/link"
-import ProfileLink from "@/utils/Links/ProfileLink"
-import ChatLink from "@/utils/Links/ChatLink"
-import EventLink from "@/utils/Links/EventLink"
-import GroupLink from "@/utils/Links/GroupLink"
-import LogoutButton from "@/utils/Links/Logout"
-import PostsLink from "@/utils/Links/PostsLink"
-import FriendsLink from "@/utils/Links/FriendsLink"
+import ProfileLink from "@/components/links/ProfileLink"
+import ChatLink from "@/components/links/ChatLink"
+import EventLink from "@/components/links/EventLink"
+import GroupLink from "@/components/links/GroupLink"
+import LogoutButton from "@/utils/Logout"
+import PostsLink from "@/components/links/PostsLink"
+import FriendsLink from "@/components/links/FriendsLink"
 import { memo } from "react"
 
 

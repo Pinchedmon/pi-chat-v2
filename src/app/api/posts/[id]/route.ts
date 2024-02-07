@@ -32,6 +32,7 @@ export async function GET(req: Request, route: { params: { id: string } }) {
             select: {
               id: true,
               content: true,
+              img: true,
               author: {
                 select: {
                   tag: true,
@@ -69,6 +70,7 @@ export async function GET(req: Request, route: { params: { id: string } }) {
             select: {
               id: true,
               content: true,
+              img: true,
               author: {
                 select: {
                   tag: true,
@@ -112,6 +114,7 @@ export async function GET(req: Request, route: { params: { id: string } }) {
             select: {
               id: true,
               content: true,
+              img: true,
               author: {
                 select: {
                   tag: true,
@@ -153,6 +156,7 @@ export async function GET(req: Request, route: { params: { id: string } }) {
             select: {
               id: true,
               content: true,
+              img: true,
               author: {
                 select: {
                   tag: true,

@@ -3,7 +3,7 @@ import Dialogs from "@/widgets/main/Chat/Dialogs"
 import SelectedDialog from "./components/SelectedDialog"
 import Chat from "./components/Chat"
 import { useSearchParams } from "next/navigation"
-import PreviousButton from "@/utils/PreviousButton"
+import PreviousButton from "@/components/buttons/PreviousButton"
 
 const ChatPage = () => {
     const id = useSearchParams().get('id');

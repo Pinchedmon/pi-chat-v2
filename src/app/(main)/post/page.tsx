@@ -1,7 +1,7 @@
 'use client';
 import Post from "@/components/Post"
-import Comment from "@/components/Comment"
-import PreviousButton from "@/utils/PreviousButton"
+import Comment from "@/app/(main)/post/components/Comment"
+import PreviousButton from "@/components/buttons/PreviousButton"
 import Chatarea from "@/utils/SendMessageArea"
 import useSWR from "swr"
 import { fetcher } from "@/lib/fetcher"

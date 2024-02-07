@@ -1,9 +1,9 @@
 'use client'
 
-import ChatLink from "@/utils/Links/ChatLink"
-import MobileMenuLink from "@/utils/Links/MoblieMenuLink"
-import PostsLink from "@/utils/Links/PostsLink"
-import ProfileLink from "@/utils/Links/ProfileLink"
+import ChatLink from "@/components/links/ChatLink"
+import MobileMenuLink from "@/components/links/MoblieMenuLink"
+import PostsLink from "@/components/links/PostsLink"
+import ProfileLink from "@/components/links/ProfileLink"
 import MobileMenu from "../MobileMenu"
 import { useEffect, useState } from "react"
 

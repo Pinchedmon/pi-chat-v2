@@ -10,5 +10,5 @@ export type post = {
     publishedAt: Date;
     likes: number;
     comments: number;
-    imageUrl?: string | undefined;
+    img?: string | undefined;
 }

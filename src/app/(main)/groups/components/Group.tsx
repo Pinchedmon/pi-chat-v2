@@ -1,4 +1,4 @@
-import EditButton from "@/utils/EditButton";
+import EditButton from "@/components/buttons/EditButton";
 import { EditOption } from "@/utils/types/editButton";
 import Image from "next/image";
 import Link from "next/link";

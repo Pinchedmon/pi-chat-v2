@@ -1,4 +1,4 @@
-import EditButton from "@/utils/EditButton"
+import EditButton from "@/components/buttons/EditButton"
 import { comment } from "@/utils/types/comment"
 import { EditOption } from "@/utils/types/editButton"
 import Image from "next/image"
@@ -23,6 +23,10 @@ const Comment = (props: CommentProps) => {
                         <p className="text-[14px] md:text-[16px] mt-[6px]">
                             {props.comment.content}
                         </p>
+                        {props.comment.img &&
+                            <div className="mt-[12px]">
+                                <Image src={props.comment.img} alt={""} width={200} height={200} />
+                            </div>}
                     </div>
                     <div className="">
                         <EditButton option={EditOption.COMMENT} widthIcon={26} widthButton={42} fill={"#b5b5b5"} data={{ content: props.comment.content, img: props.comment.img }} id={props.comment.id} />

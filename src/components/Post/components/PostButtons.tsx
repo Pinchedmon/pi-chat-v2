@@ -1,7 +1,7 @@
 'use client'
 
-import CommentIcon from "@/utils/CommentButton/CommentIcon";
-import LikeIcon from "@/utils/LikeButton/LikeIcon";
+import CommentIcon from "@/components/buttons/CommentButton/CommentIcon";
+import LikeIcon from "@/components/buttons/LikeButton/LikeIcon";
 import axios from "axios";
 
 import { usePathname, useRouter } from "next/navigation";
