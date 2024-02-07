@@ -25,7 +25,7 @@ const Comment = (props: CommentProps) => {
                         </p>
                     </div>
                     <div className="">
-                        <EditButton option={EditOption.COMMENT} widthIcon={26} widthButton={42} fill={"#b5b5b5"} id={props.comment.id} />
+                        <EditButton option={EditOption.COMMENT} widthIcon={26} widthButton={42} fill={"#b5b5b5"} data={{ content: props.comment.content, img: props.comment.img }} id={props.comment.id} />
                     </div>
                 </article>
             }

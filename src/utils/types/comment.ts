@@ -7,7 +7,7 @@ export type comment = {
         avatar: string;
         id: string;
     }
- 
+    img?: string;
     publishedAt: Date;
 
 

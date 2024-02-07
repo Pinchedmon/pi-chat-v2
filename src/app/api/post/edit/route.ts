@@ -1,7 +1,7 @@
 import {db} from '@/lib/db';
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function PUT(req: Request) {
     try {
         const body = await req.json();
         const {postId, content, img}  = body;

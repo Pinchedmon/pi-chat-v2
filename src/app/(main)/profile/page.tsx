@@ -13,6 +13,7 @@ import useModal from '@/hooks/useModal'
 import ProfileUsername from '@/components/profile/ProfileUsername'
 import AddFriendButton from '@/components/profile/AddFriendButton'
 import ProfileBio from '@/components/profile/ProfileBio'
+import PostsWall, { PostsType, SearchType } from '@/widgets/main/PostsWall'
 
 const ProfilePage = () => {
     const { isModalOpen, openModal, closeModal } = useModal();
@@ -35,7 +36,7 @@ const ProfilePage = () => {
     return (
 
         <div>
-            {data &&
+            {data.profile &&
                 <>
                     <Modal isOpen={isModalOpen} onClose={closeModal}>
                         <ProfileForm id={id} mutate={mutateData} />
@@ -62,7 +63,7 @@ const ProfilePage = () => {
                     <div className='ml-2 md:ml-0 text-[16px] md:text-[16px] mt-[20px] w-[132px] h-[40px] flex pl-4 font-bold rounded-[20px] items-center  bg-bg-content dark:bg-dark-bg-content'>
                         Моя стена
                     </div>
-                    {/* <PostsWall posts={[]} type={PostsType.PROFILE} /> */}
+                    <PostsWall type={PostsType.PROFILE} id={id} search={SearchType.FRIENDS} />
                 </>}
         </div>
 

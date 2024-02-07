@@ -1,5 +1,5 @@
 'use client';
-import { Post } from "@/components/Post"
+import Post from "@/components/Post"
 import Comment from "@/components/Comment"
 import PreviousButton from "@/utils/PreviousButton"
 import Chatarea from "@/utils/SendMessageArea"
@@ -8,22 +8,21 @@ import { fetcher } from "@/lib/fetcher"
 import { redirect, useSearchParams } from "next/navigation"
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
-
 const PostPage = () => {
     const id = useSearchParams().get('id');
-    const session = useSession()
-    const { data, isLoading, error } = useSWR(`/api/post/${id}`, fetcher);
+    const session = useSession();
+    const { data, isLoading } = useSWR(`/api/post/${id}`, fetcher);
     useEffect(() => {
-        if (data?.post == null) {
+        if (!data?.post && !isLoading) {
             redirect('/posts')
         }
-    }, [])
+    }, [data?.post, isLoading])
     return (
         <>
-            {data && data?.post !== null && session.data &&
+            {data && data?.post && session.data &&
                 <div className="mt-[10px] relative">
                     <PreviousButton href="posts?filter=wall" />
-                    <Post post={data.post} userId={session.data?.user.id} />
+                    {data.post && <Post post={data.post} userId={session.data?.user.id} />}
                     <div className="ml-[30px] mb-[60px] md:mb-0">
                         {data.comments ?
                             data.comments.map((comment: any) => (

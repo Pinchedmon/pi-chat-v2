@@ -46,11 +46,10 @@ const EditButton = (props: svgProps) => {
             </div>
             {isHovering &&
                 <>
-                    {option === EditOption.POST && <PostEdit id={id} data={
-                        data} />}
+                    {option === EditOption.POST && <PostEdit id={id} data={data} />}
                     {option === EditOption.PROFILE && <ProfileEdit />}
                     {option === EditOption.MYPROFILE && <MyProfileEdit openModal={openModal as () => void} />}
-                    {option === EditOption.COMMENT && <CommentEdit id={id} />}
+                    {option === EditOption.COMMENT && <CommentEdit id={id} data={data} />}
                     {option === EditOption.DIALOG && <DialogEdit />}
                     {option === EditOption.FRIEND && <FriendEdit />}
                     {option === EditOption.GROUP && <GroupEdit />}

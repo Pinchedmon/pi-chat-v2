@@ -52,7 +52,7 @@ export async function GET(req: NextApiRequest, route: { params: { id: string } }
         },
       });
     if (!post) {
-      return NextResponse.json({ post: null, message: "Posts with this tag already exists" }, { status: 409 });
+      return NextResponse.json({ post: undefined, message: "Posts with this tag already exists" }, { status: 409 });
     }
 
     return NextResponse.json({ post: {...post, likes: likeCount, comments: commentCount}, comments: comments }, { status: 200 });

@@ -1,10 +1,11 @@
 'use client'
 
-import CommentIcon from "@/utils/CommentButton/CommentIcon"
-import LikeIcon from "@/utils/LikeButton/LikeIcon"
+import CommentIcon from "@/utils/CommentButton/CommentIcon";
+import LikeIcon from "@/utils/LikeButton/LikeIcon";
 import axios from "axios";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+
+import { usePathname, useRouter } from "next/navigation";
+import { memo } from "react";
 import { useSWRConfig } from "swr";
 
 interface Props {
@@ -13,14 +14,16 @@ interface Props {
     id: number
     userId: string | number;
 }
-const PostButtons = (props: Props) => {
+
+const PostButtons = ((props: Props) => {
+    const router = useRouter()
     const { mutate } = useSWRConfig();
+    const pathname = usePathname();
     const { likes, comments, id, userId } = props;
     const handleLike = async () => {
         await axios.post(`/api/post/like`, { postId: id, userId: userId })
             .then(response => {
-                mutate(`/api/posts/${userId}`);
-                mutate(`/api/post/${id}`);
+                pathname == '/posts' ? mutate(`/api/posts/${userId}`) : mutate(`/api/post/${id}`)
             })
     }
     return (
@@ -29,12 +32,12 @@ const PostButtons = (props: Props) => {
                 <LikeIcon width={24} height={24} fill={"#b5b5b5"} />
                 <p className="font-normal text-gray-text text-[14px] md:text-[16px]">{likes}</p>
             </button>
-            <Link href={`post?id=${props.id}`} className="flex cursor-pointer gap-[10px]">
+            <button onClick={() => router.push(`/post?id=${props.id}`)} className="flex cursor-pointer gap-[10px]">
                 <CommentIcon width={24} height={24} fill={"#b5b5b5"} />
                 <p className="font-normal text-gray-text text-[14px] md:text-[16px]">{comments}</p>
-            </Link>
+            </button>
         </div>
     )
-}
+})
 
-export default PostButtons
+export default PostButtons;

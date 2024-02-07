@@ -1,5 +1,5 @@
 'use client'
-import PostsWall, { PostsType } from '@/widgets/main/PostsWall'
+import PostsWall, { PostsType, SearchType } from '@/widgets/main/PostsWall'
 import SearchPostsBar from './components/SearchPostsBar'
 import { redirect, useSearchParams } from 'next/navigation'
 import { useLayoutEffect } from 'react'
@@ -23,7 +23,7 @@ const PostsPage = () => {
                     <SearchPostsBar />
                     <div>
                         <AddPostForm id={session.data?.user.id} />
-                        <PostsWall type={PostsType.SEARCH} id={session.data?.user.id} />
+                        <PostsWall search={SearchType.WALL} type={PostsType.SEARCH} id={session.data?.user.id} />
                     </div>
                 </>}
         </section>

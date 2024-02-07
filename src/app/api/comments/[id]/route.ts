@@ -22,6 +22,7 @@ export async function GET(req: NextApiRequest, route: { params: { id: string } }
           select: {
             id: true,
             content: true,
+            img: true,
             author: {
               select: {
                 tag: true,

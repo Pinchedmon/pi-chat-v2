@@ -1,19 +1,20 @@
 'use client'
+
 import axios from "axios";
 import { useForm } from "react-hook-form"
 import TextareaAutosize from 'react-textarea-autosize';
+
 interface IFormInput {
     content: string;
     img: string;
 }
-
-const EditPostForm = (props: { data: { content: string, img: string }, mutate: () => void, id: number | undefined, onClose: () => void }) => {
+const EditCommentForm = (props: { data: { content: string, img: string }, mutate: () => void, id: number | undefined, onClose: () => void }) => {
     const { data, mutate, id, onClose } = props
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>()
 
     const onSubmit = async (data: IFormInput) => {
-        await axios.put('/api/post/edit', {
-            postId: id,
+        await axios.put('/api/comment/edit', {
+            commentId: id,
             content: data.content,
             img: data.img
         }).then(pr => {
@@ -54,4 +55,4 @@ const EditPostForm = (props: { data: { content: string, img: string }, mutate: (
     )
 }
 
-export default EditPostForm
+export default EditCommentForm

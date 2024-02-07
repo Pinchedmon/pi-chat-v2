@@ -11,7 +11,7 @@ const EventPage = () => {
                 <p className="p-3 text-[16px] md:text-[20px] font-bold">Событие</p>
             </div>
             <section className='flex mt-[20px]'>
-                <ProfileIcon />
+                {/* <ProfileIcon /> */}
                 <div className='flex grow md:grow-0 flex-col md:mx-[20px] justify-between'>
                     <div className='rounded-[20px] md:w-[340px] h-[76px] md:h-[91px]  font-medium  bg-bg-content dark:bg-dark-bg-content'>
                         <p className='w-full text-[12px] md:text-[16px] p-4'> Описание события краткое</p>
@@ -37,7 +37,7 @@ const EventPage = () => {
                     Стена cобытия
                 </p>
             </div>
-            <PostsWall posts={[]} type={PostsType.GROUP} />
+            {/* <PostsWall posts={[]} type={PostsType.GROUP} /> */}
         </section>
     )
 }

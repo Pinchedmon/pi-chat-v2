@@ -2,13 +2,15 @@ import {db} from '@/lib/db';
 import { NextApiRequest } from 'next';
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextApiRequest, route: { params: { id: string } }) {
+export async function GET(req: Request, route: { params: { id: string } }) {
   try {
-
+    const { searchParams } = new URL(req.url);
+    const filter = searchParams.get('filter');
     const id = route.params.id;
     if (typeof id !== 'string' || !Number.isInteger(Number(id))) {
       return NextResponse.json({ message: "Invalid user ID" }, { status: 400 });
     }
+    console.log(filter)
     const user = await db.user.findUnique({
         where: { id: Number(id) },
       });
@@ -16,44 +18,178 @@ export async function GET(req: NextApiRequest, route: { params: { id: string } }
       if (!user) {
         return NextResponse.json({ message: "User not found" }, { status: 404 });
       }   
-
-      const getPostsWithLikeCounts = async () => {
-        const posts = await db.post.findMany({
-          select: {
-            id: true,
-            content: true,
-            author: {
-              select: {
-                tag: true,
-                username: true,
-                id: true,
-                avatar: true,
+    let posts;
+    switch(filter) {
+      case 'friends': {
+        const getPostsWithLikeCounts = async () => {
+          const posts = await db.post.findMany({
+            where: {
+                  authorId: {
+                    in: user.friends
+                  },
+            },
+  
+            select: {
+              id: true,
+              content: true,
+              author: {
+                select: {
+                  tag: true,
+                  username: true,
+                  id: true,
+                  avatar: true,
+                },
               },
             },
-          },
-        });
-      
-        const postsWithLikeCounts = await Promise.all(
-          posts.map(async (post) => {
-            const likeCount = await db.postLike.count({
-              where: {
-                postId: post.id,
+          });
+          const postsWithLikeCounts = await Promise.all(
+            posts.map(async (post) => {
+              const likeCount = await db.postLike.count({
+                where: {
+                  postId: post.id,
+                },
+              });
+              const commentCount = await db.comment.count({
+                where: {
+                  postId: post.id,
+                },
+              });
+              return { ...post, likes: likeCount, comments: commentCount };
+            })
+          );
+        
+          return postsWithLikeCounts;
+        };
+         posts = await getPostsWithLikeCounts();
+         break;
+      }
+      case 'wall':{
+        const getPostsWithLikeCounts = async () => {
+          const posts = await db.post.findMany({ 
+            select: {
+              id: true,
+              content: true,
+              author: {
+                select: {
+                  tag: true,
+                  username: true,
+                  id: true,
+                  avatar: true,
+                },
               },
-            });
-            const commentCount = await db.comment.count({
-              where: {
-                postId: post.id,
+            },
+          });
+          const postsWithLikeCounts = await Promise.all(
+            posts.map(async (post) => {
+              const likeCount = await db.postLike.count({
+                where: {
+                  postId: post.id,
+                },
+              });
+              const commentCount = await db.comment.count({
+                where: {
+                  postId: post.id,
+                },
+              });
+              return { ...post, likes: likeCount, comments: commentCount };
+            })
+          );
+        
+          return postsWithLikeCounts;
+        };
+        posts = await getPostsWithLikeCounts();
+        break;
+      }
+      case 'search':{
+        const getPostsWithLikeCounts = async () => {
+          const posts = await db.post.findMany({ 
+            where: {
+              content: {
+                contains: '',
+                mode: 'insensitive',
               },
-            });
-            return { ...post, likes: likeCount, comments: commentCount };
-          })
-        );
+            },
+            select: {
+              id: true,
+              content: true,
+              author: {
+                select: {
+                  tag: true,
+                  username: true,
+                  id: true,
+                  avatar: true,
+                },
+              },
+            },
+          });
+          const postsWithLikeCounts = await Promise.all(
+            posts.map(async (post) => {
+              const likeCount = await db.postLike.count({
+                where: {
+                  postId: post.id,
+                },
+              });
+              const commentCount = await db.comment.count({
+                where: {
+                  postId: post.id,
+                },
+              });
+              return { ...post, likes: likeCount, comments: commentCount };
+            })
+          );
+        
+          return postsWithLikeCounts;
+        };
+        posts = await getPostsWithLikeCounts();
+        break;
+      }
+      case 'profile': {
+        const getPostsWithLikeCounts = async () => {
+          const posts = await db.post.findMany({
+            where: {
+             authorId:  parseInt(id)
+            },
+  
+            select: {
+              id: true,
+              content: true,
+              author: {
+                select: {
+                  tag: true,
+                  username: true,
+                  id: true,
+                  avatar: true,
+                },
+              },
+            },
+          });
+          const postsWithLikeCounts = await Promise.all(
+            posts.map(async (post) => {
+              const likeCount = await db.postLike.count({
+                where: {
+                  postId: post.id,
+                },
+              });
+              const commentCount = await db.comment.count({
+                where: {
+                  postId: post.id,
+                },
+              });
+              return { ...post, likes: likeCount, comments: commentCount };
+            })
+          );
+        
+          return postsWithLikeCounts;
+        };
+        posts = await getPostsWithLikeCounts();
+        break;
+      }
+    }
       
-        return postsWithLikeCounts;
-      };
-      const posts = await getPostsWithLikeCounts();
+    
+     
     if (!posts) {
-      return NextResponse.json({ posts: null, message: "Posts with this tag already exists" }, { status: 409 });
+      return NextResponse.json({ posts: undefined, message: "Не могу найти" }, { status: 409 });
     }
 
     return NextResponse.json({ posts: posts,}, { status: 200 });
