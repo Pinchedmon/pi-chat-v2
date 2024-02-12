@@ -57,13 +57,13 @@ const ProfilePage = () => {
                         <EditIcon openModal={openModal} widthIcon={26} widthButton={42} fill={'#b5b5b5'} option={session.data?.user.id !== id ? EditOption.PROFILE : EditOption.MYPROFILE} />
                     </div>
                     {
-                        session.data?.user.id !== id && <AddFriendButton />
+                        session.data?.user.id !== id && <AddFriendButton id={id} userId={session.data?.user.id as string} />
                     }
 
                     <div className='ml-2 md:ml-0 text-[16px] md:text-[16px] mt-[20px] w-[132px] h-[40px] flex pl-4 font-bold rounded-[20px] items-center  bg-bg-content dark:bg-dark-bg-content'>
                         Моя стена
                     </div>
-                    <PostsWall type={PostsType.PROFILE} id={id} search={SearchType.FRIENDS} />
+                    <PostsWall type={PostsType.PROFILE} id={id} search={SearchType.PROFILE} />
                 </>}
         </div>
 

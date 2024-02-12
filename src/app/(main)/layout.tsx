@@ -14,7 +14,6 @@ const AuthLayout = ({
 }) => {
 
     return (
-
         <main className='w-screen h-full flex  justify-center overflow-y-auto bg-light-bg dark:bg-dark-bg  '>
             <div className='flex-col  h-full   md:flex-row  flex w-[1440px]'>
                 <div className='sticky  top-0'>

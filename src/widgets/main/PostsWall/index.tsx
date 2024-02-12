@@ -2,13 +2,14 @@ import Post from "@/components/Post";
 import { fetcher } from "@/lib/fetcher";
 import { post } from "@/utils/types/post";
 import clsx from "clsx";
+import { useSearchParams } from "next/navigation";
 import { memo } from "react";
 import useSWR from "swr";
 
 export const enum PostsType {
-    PROFILE = ' lg:columns-2',
+    PROFILE = ' ',
     WALL = 'wall',
-    GROUP = 'lg:columns-2',
+    GROUP = '',
     SEARCH = '',
     ONLYFRIENDS = 'onlyFriends'
 }
@@ -28,11 +29,11 @@ export interface PostsWall {
 }
 
 const PostsWall = (props: PostsWall) => {
-    const { data, error } = useSWR(`/api/posts/${props.id}?filter=${props.search}`, fetcher);
+    const filter = useSearchParams().get('filter')
+    const { data, error } = useSWR(`/api/posts/${props.id}?filter=${filter ? filter : props.search}`, fetcher);
     if (error) {
         return <div>Error loading posts!</div>;
     }
-    console.log(data)
     if (!data) {
         return <div>Loading posts...</div>;
     }

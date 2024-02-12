@@ -3,9 +3,7 @@
 import CommentIcon from "@/components/buttons/CommentButton/CommentIcon";
 import LikeIcon from "@/components/buttons/LikeButton/LikeIcon";
 import axios from "axios";
-
 import { usePathname, useRouter } from "next/navigation";
-import { memo } from "react";
 import { useSWRConfig } from "swr";
 
 interface Props {
@@ -23,7 +21,7 @@ const PostButtons = ((props: Props) => {
     const handleLike = async () => {
         await axios.post(`/api/post/like`, { postId: id, userId: userId })
             .then(response => {
-                pathname == '/posts' ? mutate(`/api/posts/${userId}`) : mutate(`/api/post/${id}`)
+                pathname == '/posts' ? mutate(`/api/posts/${userId}?filter=wall`) : mutate(`/api/post/${id}`)
             })
     }
     return (

@@ -1,7 +1,19 @@
+'use client'
+import useSWR from "swr";
 import Friend from "./components/Friend";
+import { fetcher } from "@/lib/fetcher";
+import { useSession } from "next-auth/react";
 
 
 const FriendsPage = () => {
+    const session = useSession()
+    const { data, isLoading, error } = useSWR(`/api/friends?id=${session.data?.user.id}`, fetcher)
+
+    if (error) return <div>ошибка загрузки</div>
+
+    if (isLoading) return <div>загрузка...</div>
+
+    console.log(data)
     return (
         <section className='mt-[12px] w-full h-full '>
             <div className='flex ml-2 md:ml-0 gap-2 mb-3'>
