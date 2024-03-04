@@ -5,7 +5,7 @@ CREATE TABLE "User" (
     "tag" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "avatar" TEXT,
-    "friends" INTEGER[],
+    "follows" INTEGER[],
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -18,7 +18,6 @@ CREATE TABLE "Post" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "authorId" INTEGER,
     "groupId" INTEGER,
-    "eventId" INTEGER,
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
 );
@@ -41,15 +40,6 @@ CREATE TABLE "Comment" (
     "postId" INTEGER NOT NULL,
 
     CONSTRAINT "Comment_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "CommentLike" (
-    "id" SERIAL NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "commentId" INTEGER NOT NULL,
-
-    CONSTRAINT "CommentLike_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -84,18 +74,6 @@ CREATE TABLE "Profile" (
 );
 
 -- CreateTable
-CREATE TABLE "Event" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "img" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL,
-    "location" TEXT,
-
-    CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Group" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
@@ -107,12 +85,6 @@ CREATE TABLE "Group" (
 
 -- CreateTable
 CREATE TABLE "_UserChat" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL
-);
-
--- CreateTable
-CREATE TABLE "_EventParticipant" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
 );
@@ -136,12 +108,6 @@ CREATE UNIQUE INDEX "_UserChat_AB_unique" ON "_UserChat"("A", "B");
 CREATE INDEX "_UserChat_B_index" ON "_UserChat"("B");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "_EventParticipant_AB_unique" ON "_EventParticipant"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_EventParticipant_B_index" ON "_EventParticipant"("B");
-
--- CreateIndex
 CREATE UNIQUE INDEX "_Membership_AB_unique" ON "_Membership"("A", "B");
 
 -- CreateIndex
@@ -154,9 +120,6 @@ ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") 
 ALTER TABLE "Post" ADD CONSTRAINT "Post_groupId_fkey" FOREIGN KEY ("groupId") REFERENCES "Group"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Post" ADD CONSTRAINT "Post_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "PostLike" ADD CONSTRAINT "PostLike_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -167,12 +130,6 @@ ALTER TABLE "Comment" ADD CONSTRAINT "Comment_authorId_fkey" FOREIGN KEY ("autho
 
 -- AddForeignKey
 ALTER TABLE "Comment" ADD CONSTRAINT "Comment_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "CommentLike" ADD CONSTRAINT "CommentLike_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "CommentLike" ADD CONSTRAINT "CommentLike_commentId_fkey" FOREIGN KEY ("commentId") REFERENCES "Comment"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Message" ADD CONSTRAINT "Message_chatId_fkey" FOREIGN KEY ("chatId") REFERENCES "Chat"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -188,12 +145,6 @@ ALTER TABLE "_UserChat" ADD CONSTRAINT "_UserChat_A_fkey" FOREIGN KEY ("A") REFE
 
 -- AddForeignKey
 ALTER TABLE "_UserChat" ADD CONSTRAINT "_UserChat_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_EventParticipant" ADD CONSTRAINT "_EventParticipant_A_fkey" FOREIGN KEY ("A") REFERENCES "Event"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_EventParticipant" ADD CONSTRAINT "_EventParticipant_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_Membership" ADD CONSTRAINT "_Membership_A_fkey" FOREIGN KEY ("A") REFERENCES "Group"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -1,9 +1,7 @@
 import ThemeChanger from "@/utils/ThemeChanger"
-
 import Link from "next/link"
 import ProfileLink from "@/components/links/ProfileLink"
 import ChatLink from "@/components/links/ChatLink"
-import EventLink from "@/components/links/EventLink"
 import GroupLink from "@/components/links/GroupLink"
 import LogoutButton from "@/utils/Logout"
 import PostsLink from "@/components/links/PostsLink"
@@ -27,7 +25,6 @@ const Sidebar = () => {
                         <ChatLink />
                         <GroupLink />
                         <FriendsLink />
-                        <EventLink />
                     </div>
                 </div>
                 <div className="mt-[16px] flex bottom-0 gap-[28px] justify-center mb-[20px]">

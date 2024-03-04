@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   try {
-
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
 
@@ -14,7 +13,7 @@ export async function GET(req: Request) {
     const data = await db.user.findUnique({
         where: { id: Number(id) },
         select: {
-            friends: true
+            follows: true
         }
       }) ;
       console.log(data)
@@ -25,7 +24,7 @@ export async function GET(req: Request) {
     
       const getUsers = async() => {
         const users: any[]= [];
-        data.friends.forEach(async (id: number) =>
+        data.follows.forEach(async (id: number) =>
         users.push( db.user.findUnique({
            where: { id: Number(id) },
            select: {

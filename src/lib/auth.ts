@@ -26,7 +26,6 @@ export const authOptions: NextAuthOptions = {
         async authorize(credentials) {
         
                 if (!credentials?.tag || !credentials?.password){
-                    console.log(1)
                     return null;
                 }
 
@@ -36,13 +35,11 @@ export const authOptions: NextAuthOptions = {
                     }
                 })
                 if (!existingUser){
-                    console.log(2)
                     return null;
                 }
 
                 const passwordMatch = await compare(credentials.password, existingUser.password)
                 if (!passwordMatch){
-                    console.log(3)
                     return null;
                 }
                 return {

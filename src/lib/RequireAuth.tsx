@@ -6,10 +6,10 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
     const router = useRouter();
     const { status } = useSession()
     if (status === "unauthenticated") {
-        router.push('/signin');
+        router.push('/admin');
     }
     if (status === "loading") {
-        return ''
+        return <>loading</>
     }
     if (status === "authenticated") {
         return <>{children}</>

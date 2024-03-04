@@ -9,7 +9,7 @@ interface GroupProps {
     avatar: string;
     descr: string;
 }
-const Friend = ({ props }: { props: GroupProps }) => {
+const Follow = ({ props }: { props: GroupProps }) => {
     return (
         <div className="mb-4  flex  w-full rounded-[50px] px-4 pt-4 pb-4 bg-bg-content dark:bg-dark-bg-content ">
             <Link className="grow flex cursor-pointer" href={"profile"}>
@@ -35,4 +35,4 @@ const Friend = ({ props }: { props: GroupProps }) => {
         </div>)
 }
 
-export default Friend
+export default Follow
