@@ -10,7 +10,7 @@ const GroupPage = () => {
                 <p className="p-3 text-[20px] font-bold">Группа</p>
             </div>
             <div className='flex mt-[20px]'>
-                <ProfileIcon />
+                <ProfileIcon img={""} />
 
                 <div className='flex grow md:grow-0 flex-col md:mx-[20px] justify-between'>
                     <div className='rounded-[20px] md:w-[340px] h-[76px] md:h-[91px]  font-medium  bg-bg-content dark:bg-dark-bg-content'>
@@ -37,7 +37,7 @@ const GroupPage = () => {
                     Стена группы
                 </p>
             </div>
-            <PostsWall posts={[]} type={PostsType.GROUP} />
+            {/* <PostsWall posts={[]} type={PostsType.GROUP} /> */}
         </div >
     )
 }

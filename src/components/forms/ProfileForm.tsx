@@ -6,28 +6,39 @@ import { useForm } from 'react-hook-form';
 
 interface IFormInput {
     bio: string;
-    image: string
+    img: string
     backImage: string;
     username: string;
 }
 
 
-const ProfileForm = (props: { id: string, mutate: (profileData: any, userData: any) => void }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>()
+const ProfileForm = (props: { id: string, mutate: (profileData: any, userData: any) => void, data: IFormInput }) => {
+    console.log(props.data)
+    const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
+        defaultValues: {
+            bio: props.data.bio,
+            img: props.data.img,
+            backImage: props.data.backImage,
+            username: props.data.username
+        },
+        reValidateMode: "onChange"
+    })
     const onSubmit = async (data: IFormInput) => {
         await axios.post('/api/profile/edit', {
             userId: props.id,
             bio: data.bio,
-            image: data.image,
+            image: data.img,
             backImage: data.backImage,
             username: data.username,
         }).then(pr => {
             if (pr.status == 201) {
-                props.mutate({ bio: data.bio, backImage: data }, { bio: data.bio, image: data.image })
+                props.mutate({ bio: data.bio, backImage: data }, { bio: data.bio, image: data.img })
             }
         });
 
     };
+
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col  bg-bg-content dark:bg-dark-bg-content'>
             <p className="text-center text-xl  font-bold mb-[12px]">
@@ -46,16 +57,13 @@ const ProfileForm = (props: { id: string, mutate: (profileData: any, userData: a
                 id="bio"
                 className="border-[2px] mt-[12px] border-[#b5b5b5] pl-3 p-2 rounded-xl"
                 {...register('bio', {
-
-
                 })}
             />
             <input
                 placeholder="аватарка"
                 id="image"
                 className="border-[2px] mt-[12px] border-[#b5b5b5] pl-3 p-2 rounded-xl"
-                {...register('image', {
-
+                {...register('img', {
                 })}
             />
             <input

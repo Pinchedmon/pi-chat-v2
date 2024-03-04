@@ -18,30 +18,29 @@ export async function GET(req: Request) {
       }) ;
       console.log(data)
       if (!data) {
-        return NextResponse.json({Message: 'no friends' }, { status: 404 });
+        return NextResponse.json({Message: 'no follows' }, { status: 404 });
       }
- 
-    
-      const getUsers = async() => {
-        const users: any[]= [];
-        data.follows.forEach(async (id: number) =>
-        users.push( db.user.findUnique({
-           where: { id: Number(id) },
-           select: {
-               avatar: true,
-               id: true,
-               tag: true,
-               username: true
 
-           }
-         })
-       ))
-     
-        return users;
+      const getUsers = async () => {
+        const users: any[]= [];
+        const promises = data.follows.map(async (id: number) =>{
+          let x = await db.user.findUnique({
+            where: { id: Number(id) },
+            select: {
+                avatar: true,
+                id: true,
+                tag: true,
+                username: true
+            }
+          })
+          return x;
+        })
+        const results = await Promise.all(promises);
+        return results;
       }
         
-      const friends = await getUsers()
-    return NextResponse.json({friends: friends }, { status: 200 });
+    
+    return NextResponse.json({friends: await getUsers() }, { status: 200 });
   } catch (err) {
     console.error(err);
     return NextResponse.json({ message: "Something went wrong!" }, { status: 500 });

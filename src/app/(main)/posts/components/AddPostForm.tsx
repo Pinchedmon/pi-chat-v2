@@ -1,11 +1,10 @@
-import { fetcher } from "@/lib/fetcher";
 import axios from "axios";
 import { useSearchParams } from "next/navigation"
 import { useState } from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { useSWRConfig } from "swr";
 
-const AddPostForm = (props: { id: string }) => {
+const AddPostForm = (props: { id: string, filter: string, search: string }) => {
     const searchParams = useSearchParams()
     const { mutate } = useSWRConfig();
     const [content, setContent] = useState('');
@@ -18,7 +17,7 @@ const AddPostForm = (props: { id: string }) => {
             content: content
         }).then(res => {
             if (res.status == 201) {
-                mutate(`/api/posts/${props.id}`, fetcher(`/api/posts/${props.id}`))
+                mutate(`/api/posts/${props.id}?filter=${props.filter ? props.filter : props.search}`)
                 setContent('')
             }
         })

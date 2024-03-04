@@ -18,7 +18,7 @@ import PostsWall, { PostsType, SearchType } from '@/widgets/main/PostsWall'
 const ProfilePage = () => {
     const { isModalOpen, openModal, closeModal } = useModal();
     const session = useSession();
-    const router = useRouter()
+    const router = useRouter();
     const id = useSearchParams().get('id');
     const { data, mutate, error } = useSWR(`/api/profile/${id}`, fetcher);
     if (error) {
@@ -39,10 +39,10 @@ const ProfilePage = () => {
             {data.profile &&
                 <>
                     <Modal isOpen={isModalOpen} onClose={closeModal}>
-                        <ProfileForm id={id} mutate={mutateData} />
+                        <ProfileForm id={id} mutate={mutateData} data={{ ...data.profile, ...data.user }} />
                     </Modal>
                     <div className='bg-cover bg-center w-full mt-[10px] h-[150px] flex flex-col-reverse rounded-[20px]  bg-bg-content dark:bg-dark-bg-content'
-                        style={{ backgroundImage: data.profile?.backgroundImage ? `url(${data.profile.backImage})` : '' }}>
+                        style={{ backgroundImage: data.profile?.backImage ? `url(${data.profile.backImage})` : '' }}>
                         <p className="p-3 text-[20px] font-bold">Профиль</p>
                     </div>
                     <div className='flex mt-[10px] md:mt-[20px]'>

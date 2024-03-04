@@ -22,7 +22,7 @@ const PostsPage = () => {
                 <>
                     <SearchPostsBar />
                     <div>
-                        <AddPostForm id={session.data?.user.id} />
+                        <AddPostForm id={session.data?.user.id} filter={filter} search={SearchType.WALL} />
                         <PostsWall search={SearchType.WALL} type={PostsType.SEARCH} id={session.data?.user.id} />
                     </div>
                 </>}

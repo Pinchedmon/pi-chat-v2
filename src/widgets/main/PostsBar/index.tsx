@@ -7,7 +7,6 @@ import SearchLink from "./Components/SearchLink"
 
 const PostsBar = () => {
     const pathname = usePathname()
-
     return (
         <>
             {pathname === '/posts' ?
@@ -23,9 +22,7 @@ const PostsBar = () => {
                     </div>
                 </div>
                 : <></>}
-
         </>
-
     )
 }
 

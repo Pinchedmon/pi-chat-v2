@@ -5,6 +5,7 @@ export async function POST(req: Request) {
     try {
         const body = await req.json();
         const {userId, bio, username, image, backImage}  = body;
+        console.log(body)
         const existingUser = await db.user.findUnique({ where: { id: parseInt(userId) }  });
             if (!existingUser) {
                 return NextResponse.json({ message: "User not found!" }, { status: 404 });

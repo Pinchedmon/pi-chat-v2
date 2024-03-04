@@ -6,8 +6,6 @@ import GroupLink from "@/components/links/GroupLink"
 import LogoutButton from "@/utils/Logout"
 import PostsLink from "@/components/links/PostsLink"
 import FriendsLink from "@/components/links/FriendsLink"
-import { memo } from "react"
-
 
 const Sidebar = () => {
     return (
@@ -36,4 +34,4 @@ const Sidebar = () => {
     )
 }
 
-export default memo(Sidebar)
+export default Sidebar

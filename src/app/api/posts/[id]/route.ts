@@ -20,12 +20,12 @@ export async function GET(req: Request, route: { params: { id: string } }) {
       }   
     let posts;
     switch(filter) {
-      case 'friends': {
+      case 'follows': {
         const getPostsWithLikeCounts = async () => {
           const posts = await db.post.findMany({
             where: {
                   authorId: {
-                    in: user.friends
+                    in: user.follows
                   },
             },
   

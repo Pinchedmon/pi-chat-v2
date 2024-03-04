@@ -18,11 +18,9 @@ const MobileMenu = (props: Props) => {
                         <FriendsLink />
                         <GroupLink />
                     </nav>
-
                     <div className="flex justify-between flex-col">
                         <ThemeChanger />
                         <LogoutButton />
-
                     </div>
                 </div>
             }
