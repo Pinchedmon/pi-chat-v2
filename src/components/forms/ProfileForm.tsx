@@ -12,7 +12,7 @@ interface IFormInput {
 }
 
 
-const ProfileForm = (props: { id: string, mutate: (profileData: any, userData: any) => void, data: IFormInput }) => {
+const ProfileForm = (props: { id: string, mutate: (profileData: any, userData: any) => void, data: IFormInput, onClose: () => void }) => {
     console.log(props.data)
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
         defaultValues: {
@@ -33,6 +33,7 @@ const ProfileForm = (props: { id: string, mutate: (profileData: any, userData: a
         }).then(pr => {
             if (pr.status == 201) {
                 props.mutate({ bio: data.bio, backImage: data }, { bio: data.bio, image: data.img })
+                props.onClose();
             }
         });
 

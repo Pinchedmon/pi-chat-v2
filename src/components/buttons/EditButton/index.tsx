@@ -11,6 +11,7 @@ import GroupEdit from "./Edits/GroupEdit";
 import FriendEdit from "./Edits/FriendEdit";
 import Modal from "@/components/ui/Modal";
 import useModal from "@/hooks/useModal";
+import MyGroupEdit from "./Edits/MyGroupEdit";
 
 interface svgProps {
     option?: EditOption;
@@ -53,6 +54,7 @@ const EditButton = (props: svgProps) => {
                     {option === EditOption.DIALOG && <DialogEdit />}
                     {option === EditOption.FRIEND && <FriendEdit data={data} />}
                     {option === EditOption.GROUP && <GroupEdit />}
+                    {option === EditOption.MYGROUP && <MyGroupEdit openModal={openModal as () => void} />}
 
                 </>
             }

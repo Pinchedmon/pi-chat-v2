@@ -17,6 +17,7 @@ model User {
   follows   Int[]    
   chats     Chat[]    @relation("UserChat")
   messages  Message[] 
+  myGroups     Group[] 
   groups    Group[]   @relation("Membership")
   profile   Profile?
   comments  Comment[]  @relation("UserComments")
@@ -90,4 +91,6 @@ model Group {
   description String?
   posts       Post[]
   members     User[]  @relation("Membership")
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      
 }

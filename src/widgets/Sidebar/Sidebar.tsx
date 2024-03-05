@@ -21,8 +21,9 @@ const Sidebar = () => {
                         <ProfileLink />
                         <PostsLink />
                         <ChatLink />
-                        <GroupLink />
                         <FriendsLink />
+                        <GroupLink />
+
                     </div>
                 </div>
                 <div className="mt-[16px] flex bottom-0 gap-[28px] justify-center mb-[20px]">

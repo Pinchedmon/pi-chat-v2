@@ -1,29 +1,54 @@
-import PostsWall, { PostsType } from "@/widgets/main/PostsWall"
+'use client'
 import ProfileIcon from "../profile/components/ProfileIcon"
 import EditButton from "@/components/buttons/EditButton"
 import { EditOption } from "@/utils/types/editButton"
+import useSWR, { useSWRConfig } from "swr"
+import { fetcher } from "@/lib/fetcher"
+import { useSearchParams } from "next/navigation"
+import { useSession } from "next-auth/react"
+import useModal from "@/hooks/useModal"
+import Modal from "@/components/ui/Modal"
+import EditGroupForm from "@/components/forms/EditGroupForm"
 
 const GroupPage = () => {
+    const { isModalOpen, openModal, closeModal } = useModal();
+    const id = useSearchParams().get('id');
+    const { data, error } = useSWR(`/api/group?id=${id}`, fetcher);
+    const { mutate } = useSWRConfig();
+    const refetch = () => {
+        mutate(`/api/group?id=${id}`)
+    }
+    const session = useSession();
+    if (error) {
+        return <div>Error loading posts!</div>;
+    }
+    if (!data || !id) {
+        return <div>Loading groups...</div>;
+    }
+    const { group } = data
     return (
-        <div>
+        <section>
+            <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <EditGroupForm mutate={refetch} data={{ ...group }} onClose={closeModal} />
+            </Modal>
             <div className='w-full mt-[10px] h-[150px] flex flex-col-reverse rounded-[20px]  bg-bg-content dark:bg-dark-bg-content'>
                 <p className="p-3 text-[20px] font-bold">Группа</p>
             </div>
             <div className='flex mt-[20px]'>
-                <ProfileIcon img={""} />
+                <ProfileIcon img={group.img} />
 
                 <div className='flex grow md:grow-0 flex-col md:mx-[20px] justify-between'>
                     <div className='rounded-[20px] md:w-[340px] h-[76px] md:h-[91px]  font-medium  bg-bg-content dark:bg-dark-bg-content'>
-                        <p className='w-full text-[12px] md:text-[16px] p-4'> Описание события краткое</p>
+                        <p className='w-full text-[12px] md:text-[16px] p-4'>{group.description}</p>
                     </div>
                     <div className='rounded-[20px] gap-[10px] flex items-center p-2 ь md:p-4 mt-[10px] md:w-[340px] md:h-[50px] bg-bg-content dark:bg-dark-bg-content'>
                         <p className='font-bold text-[14px] md:text-[20px] ml-2 md:ml-0'>
-                            Название группы
+                            {group.name}
                         </p>
 
                     </div>
                 </div>
-                <EditButton widthIcon={26} widthButton={42} fill={'#b5b5b5'} option={EditOption.GROUP} />
+                {group.userId == session.data?.user.id && <EditButton openModal={openModal} widthIcon={26} widthButton={42} fill={'#b5b5b5'} option={EditOption.MYGROUP} />}
             </div>
             <button className='flex mt-[10px] rounded-[20px] px-4 py-2 font-medium  bg-bg-content dark:bg-dark-bg-content'>
                 <svg className="fill-black dark:fill-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -38,7 +63,7 @@ const GroupPage = () => {
                 </p>
             </div>
             {/* <PostsWall posts={[]} type={PostsType.GROUP} /> */}
-        </div >
+        </section >
     )
 }
 

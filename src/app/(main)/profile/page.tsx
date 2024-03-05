@@ -34,12 +34,11 @@ const ProfilePage = () => {
         mutate({ profile: { ...data.profile, profileData }, user: { ...data.user, userData } })
     }
     return (
-
         <div>
             {data.profile &&
                 <>
                     <Modal isOpen={isModalOpen} onClose={closeModal}>
-                        <ProfileForm id={id} mutate={mutateData} data={{ ...data.profile, ...data.user }} />
+                        <ProfileForm id={id} mutate={mutateData} data={{ ...data.profile, ...data.user }} onClose={closeModal} />
                     </Modal>
                     <div className='bg-cover bg-center w-full mt-[10px] h-[150px] flex flex-col-reverse rounded-[20px]  bg-bg-content dark:bg-dark-bg-content'
                         style={{ backgroundImage: data.profile?.backImage ? `url(${data.profile.backImage})` : '' }}>
@@ -59,7 +58,6 @@ const ProfilePage = () => {
                     {
                         session.data?.user.id !== id && <AddFriendButton id={id} userId={session.data?.user.id as string} />
                     }
-
                     <div className='ml-2 md:ml-0 text-[16px] md:text-[16px] mt-[20px] w-[132px] h-[40px] flex pl-4 font-bold rounded-[20px] items-center  bg-bg-content dark:bg-dark-bg-content'>
                         Моя стена
                     </div>
