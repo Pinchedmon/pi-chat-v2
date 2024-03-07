@@ -20,6 +20,47 @@ export async function GET(req: Request, route: { params: { id: string } }) {
       }   
     let posts;
     switch(filter) {
+      case 'group': {
+        const getPostsWithLikeCounts = async () => {
+          const posts = await db.post.findMany({
+            where: {
+                  groupId:  Number(id)
+            },
+            select: {
+              id: true,
+              content: true,
+              img: true,
+              group: {
+                select: {
+                  name: true,
+                  id: true,
+                  img: true,
+                  userId: true
+                },
+              },
+            },
+          });
+          const postsWithLikeCounts = await Promise.all(
+            posts.map(async (post) => {
+              const likeCount = await db.postLike.count({
+                where: {
+                  postId: post.id,
+                },
+              });
+              const commentCount = await db.comment.count({
+                where: {
+                  postId: post.id,
+                },
+              });
+              return { ...post, likes: likeCount, comments: commentCount };
+            })
+          );
+        
+          return postsWithLikeCounts;
+        };
+         posts = await getPostsWithLikeCounts();
+         break;
+      }
       case 'follows': {
         const getPostsWithLikeCounts = async () => {
           const posts = await db.post.findMany({

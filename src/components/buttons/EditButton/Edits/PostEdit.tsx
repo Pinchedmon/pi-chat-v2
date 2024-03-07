@@ -4,12 +4,13 @@ import Modal from "@/components/ui/Modal";
 import useModal from "@/hooks/useModal";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { useSWRConfig } from "swr";
 const PostEdit = (props: { id: number | undefined, data: { content: string, img: string } }) => {
     const { mutate } = useSWRConfig();
     const { isModalOpen, openModal, closeModal } = useModal();
+    const id = useSearchParams().get('id');
     const session = useSession();
     const router = useRouter();
     const pathname = usePathname();
@@ -19,19 +20,33 @@ const PostEdit = (props: { id: number | undefined, data: { content: string, img:
                 id: props.id
             }
         }).then(res => {
-            mutate(`/api/posts/${session.data?.user.id}`)
-            if (pathname == '/post') {
-                router.push('/posts')
+            switch (pathname) {
+                case '/post': {
+                    router.push('/posts')
+                }
+                case '/posts': {
+                    mutate(`/api/posts/${session.data?.user.id}`)
+                }
+                case '/group': {
+                    mutate(`/api/posts/${id}?filter=group`)
+                }
             }
+
         })
     }
     const handleMutate = () => {
-
-        if (pathname == '/post') {
-            mutate(`/api/post/${props.id}`)
-        } else {
-            mutate(`/api/posts/${session.data?.user.id}`)
+        switch (pathname) {
+            case '/post': {
+                mutate(`/api/post/${props.id}`)
+            }
+            case '/posts': {
+                mutate(`/api/posts/${session.data?.user.id}`)
+            }
+            case '/group': {
+                mutate(`/api/posts/${id}?filter=group`)
+            }
         }
+
     }
     return (
         <>

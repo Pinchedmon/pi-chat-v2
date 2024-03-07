@@ -2,8 +2,8 @@ import Post from "@/components/Post";
 import { fetcher } from "@/lib/fetcher";
 import { post } from "@/utils/types/post";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import { memo } from "react";
 import useSWR from "swr";
 
 export const enum PostsType {
@@ -22,7 +22,7 @@ export const enum SearchType {
     FRIENDS = 'friends'
 }
 export interface PostsWall {
-    posts?: post[];
+    // posts?: post[];
     type: PostsType;
     search: SearchType
     id: number | string;
@@ -30,6 +30,7 @@ export interface PostsWall {
 
 const PostsWall = (props: PostsWall) => {
     const filter = useSearchParams().get('filter')
+    const session = useSession()
     const { data, error } = useSWR(`/api/posts/${props.id}?filter=${filter ? filter : props.search}`, fetcher);
     if (error) {
         return <div>Error loading posts!</div>;
@@ -39,14 +40,19 @@ const PostsWall = (props: PostsWall) => {
     }
 
     return (
-        <div className={clsx([props.type, "z-0 space-y-4 w-full mt-[10px] mb-[20px] "])}>
-            {data.posts && data.posts.map((post: post) => (
-                <Post key={post.id} post={post} userId={props.id} />
-            ))}
-            {!data.posts || data?.posts?.length == 0 && <p className="text-center mt-[22px]">Нет постов</p>}
-        </div>
+        <>
+            {
+                session.data &&
+                <div className={clsx([props.type, "z-0 space-y-4 w-full mt-[10px] mb-[20px] "])}>
+                    {data.posts && data.posts.map((post: post) => (
+                        <Post key={post.id} post={post} userId={session.data?.user.id} />
+                    ))}
+                    {!data.posts || data?.posts?.length == 0 && <p className="text-center mt-[22px]">Нет постов</p>}
+                </div>
+            }
+        </>
     );
 
 }
 
-export default memo(PostsWall)
+export default PostsWall
