@@ -11,7 +11,10 @@ interface IFormInput {
     name: string;
 }
 
-const AddGroupForm = (props: { id: string, onClose: () => void }) => {
+const AddGroupForm = (props: {
+    id: string, onClose: () => void, allStatus: boolean;
+    search: string
+}) => {
     const { mutate } = useSWRConfig()
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
         defaultValues: {
@@ -28,10 +31,9 @@ const AddGroupForm = (props: { id: string, onClose: () => void }) => {
             img: data.img,
             name: data.name
         }).then(pr => {
-            mutate('/api/groups');
+            mutate(`/api/groups${!props.allStatus ? '?userId=' + props.id : ''}${props.search ? '?search=' + props.search : ''}`);
             props.onClose();
         });
-
     };
 
     return (

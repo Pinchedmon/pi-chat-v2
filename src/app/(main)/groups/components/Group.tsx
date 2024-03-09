@@ -9,7 +9,7 @@ const Group = ({ group, userId }: { group: group, userId: number | string; }) =>
         <article className="mb-4  flex  w-full rounded-[20px] p-2 md:p-4 bg-bg-content dark:bg-dark-bg-content ">
             <Link href={`group?id=${group.id}`} className="grow flex cursor-pointer">
                 <div className="mr-4 ">
-                    <Image src={group.img ? group.img : ''} alt={"avatar"} width={50} height={50} style={{ borderRadius: '10px' }} />
+                    <Image src={group.img ? group.img : 'https://i.pinimg.com/564x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg'} alt={"avatar"} width={50} height={50} style={{ borderRadius: '10px' }} />
                 </div>
                 <div className="flex grow flex-col justify-center">
                     <p className="font-bold text-[14px] md:text-[16px]">

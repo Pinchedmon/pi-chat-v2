@@ -15,9 +15,7 @@ export async function GET(req: Request, route: { params: { id: string } }) {
         where: { id: Number(id) },
       });
   
-      if (!user) {
-        return NextResponse.json({ message: "User not found" }, { status: 404 });
-      }   
+   
     let posts;
     switch(filter) {
       case 'group': {
@@ -63,6 +61,9 @@ export async function GET(req: Request, route: { params: { id: string } }) {
       }
       case 'follows': {
         const getPostsWithLikeCounts = async () => {
+          if (!user) {
+            return NextResponse.json({ message: "User not found" }, { status: 404 });
+          }   
           const posts = await db.post.findMany({
             where: {
                   authorId: {
@@ -108,6 +109,9 @@ export async function GET(req: Request, route: { params: { id: string } }) {
       case 'wall':{
         const getPostsWithLikeCounts = async () => {
           const posts = await db.post.findMany({ 
+            where:{
+              groupId: null
+            },
             select: {
               id: true,
               content: true,

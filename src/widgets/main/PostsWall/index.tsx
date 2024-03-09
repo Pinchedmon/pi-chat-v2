@@ -35,6 +35,7 @@ const PostsWall = (props: PostsWall) => {
     if (error) {
         return <div>Error loading posts!</div>;
     }
+    console.log(data)
     if (!data) {
         return <div>Loading posts...</div>;
     }

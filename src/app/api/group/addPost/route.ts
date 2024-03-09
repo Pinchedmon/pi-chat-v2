@@ -11,7 +11,7 @@ export async function POST(req: Request) {
         const post = await db.post.create({
             data: {
                 content: content,
-                authorId: Number(groupId)
+                groupId: Number(groupId)
             },
           });
         const group = await db.group.update({
@@ -20,6 +20,7 @@ export async function POST(req: Request) {
         });
         return NextResponse.json({post: post, message: "Post created successfully"}, {status: 201});
     } catch (err) {
+        console.log(err)
         return NextResponse.json({ message: err}, {status: 500});
     }
 

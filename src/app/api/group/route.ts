@@ -8,6 +8,7 @@ export async function GET(req: Request) {
         if (!id) {
             return NextResponse.json({friend: null, message: "Group with this tag already exists"}, {status: 409})
         }
+        // const isMember = subscribes?.members.some((member) => member.id === Number(userId));
     const group = await db.group.findUnique({
     where: {
       id: Number(id),
