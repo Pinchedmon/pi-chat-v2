@@ -6,7 +6,10 @@ export async function GET(req: Request, route: { params: { id: string } }) {
   try {
     const { searchParams } = new URL(req.url);
     const filter = searchParams.get('filter');
+    const search = searchParams.get('search');
     const id = route.params.id;
+    const page = parseInt(searchParams.get('page') as string) || 1; 
+    const limit = 8;
     if (typeof id !== 'string' || !Number.isInteger(Number(id))) {
       return NextResponse.json({ message: "Invalid user ID" }, { status: 400 });
     }
@@ -37,6 +40,8 @@ export async function GET(req: Request, route: { params: { id: string } }) {
                 },
               },
             },
+            skip: (page - 1) * limit,
+            take: limit,
           });
           const postsWithLikeCounts = await Promise.all(
             posts.map(async (post) => {
@@ -64,13 +69,13 @@ export async function GET(req: Request, route: { params: { id: string } }) {
           if (!user) {
             return NextResponse.json({ message: "User not found" }, { status: 404 });
           }   
+          console.log(user)
           const posts = await db.post.findMany({
             where: {
                   authorId: {
                     in: user.follows
                   },
             },
-  
             select: {
               id: true,
               content: true,
@@ -84,6 +89,8 @@ export async function GET(req: Request, route: { params: { id: string } }) {
                 },
               },
             },
+            skip: (page - 1) * limit,
+            take: limit,
           });
           const postsWithLikeCounts = await Promise.all(
             posts.map(async (post) => {
@@ -109,9 +116,6 @@ export async function GET(req: Request, route: { params: { id: string } }) {
       case 'wall':{
         const getPostsWithLikeCounts = async () => {
           const posts = await db.post.findMany({ 
-            where:{
-              groupId: null
-            },
             select: {
               id: true,
               content: true,
@@ -124,7 +128,17 @@ export async function GET(req: Request, route: { params: { id: string } }) {
                   avatar: true,
                 },
               },
+              group: {
+                select: {
+                  name: true,
+                  id: true,
+                  img: true,
+                  userId: true
+                },
+              },
             },
+            skip: (page - 1) * limit,
+            take: limit,
           });
           const postsWithLikeCounts = await Promise.all(
             posts.map(async (post) => {
@@ -151,10 +165,7 @@ export async function GET(req: Request, route: { params: { id: string } }) {
         const getPostsWithLikeCounts = async () => {
           const posts = await db.post.findMany({ 
             where: {
-              content: {
-                contains: '',
-                mode: 'insensitive',
-              },
+              content: { contains: search || '' }
             },
             select: {
               id: true,
@@ -169,6 +180,8 @@ export async function GET(req: Request, route: { params: { id: string } }) {
                 },
               },
             },
+            skip: (page - 1) * limit,
+            take: limit,
           });
           const postsWithLikeCounts = await Promise.all(
             posts.map(async (post) => {
@@ -211,6 +224,8 @@ export async function GET(req: Request, route: { params: { id: string } }) {
                 },
               },
             },
+            skip: (page - 1) * limit,
+            take: limit,
           });
           const postsWithLikeCounts = await Promise.all(
             posts.map(async (post) => {

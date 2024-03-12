@@ -1,29 +1,69 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Follow from './Follow'
 import useSWR from 'swr'
 import { fetcher } from '@/lib/fetcher'
 import { useSession } from 'next-auth/react'
 import { follow } from "@/utils/types/follow";
+import useSWRInfinite from 'swr/infinite'
 
-const FollowWall = () => {
+
+export interface FollowsWall {
+    allStatus: boolean;
+    search: string;
+}
+
+const FollowWall = (props: FollowsWall) => {
+    const [page, setPage] = useState(1);
     const session = useSession()
-    const { data, isLoading, error } = useSWR(`/api/follows?id=${session.data?.user.id}`, fetcher)
+    const userId = session.data?.user.id
+    console.log()
 
+    const getKey = (pageIndex: number) => {
+        const baseUrl = `/api/follows`;
+        const queryParams = new URLSearchParams();
+
+
+        // if (!props.allStatus) {
+        //     queryParams.append('id', userId as string);
+        // }
+
+        if (props.search) {
+            queryParams.append('search', props.search);
+        }
+        queryParams.append('id', userId as string);
+        queryParams.append('page', String(pageIndex + page));
+
+        return `${baseUrl}?${queryParams.toString()}`;
+    };
+
+
+    // const { data, isLoading, error } = useSWR(`/api/follows?id=${session.data?.user.id}`, fetcher)
+
+    const { data, error, isLoading, mutate, size, setSize } = useSWRInfinite(getKey, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    });
     if (error) return <div>ошибка загрузки</div>
 
     if (isLoading) return <div>загрузка...</div>
-    console.log(data)
+    if (!data || !userId) {
+        return <div>Loading groups...</div>;
+    }
+
+    const follows = data.flatMap(response => response.follows);
+    console.log(follows)
     return (
         <div className="columns md:w-4/5">
-            {data.friends && data.friends.map((follow: follow) => (
+            {follows[0] && follows.map((follow: follow) => (
                 <Follow key={follow.id} props={
                     follow
                 } />
             ))}
-            {!data.friends || data?.friends?.length == 0 && <p className="text-center mt-[22px]">Нет постов</p>}
-        </div>
+            {!follows[0] && <p className="text-center mt-[22px]">Нет постов</p>}
+        </div >
     )
 }
 

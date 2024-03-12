@@ -1,6 +1,9 @@
 import { message } from "@/utils/types/message";
 import moment from "moment";
 import Image from "next/image";
+import Pusher from "pusher-js"
+import { useState, useEffect } from "react";
+
 
 const id = '1';
 
@@ -47,9 +50,21 @@ const Message = ({ props }: { props: message }) => {
     )
 }
 const Messages = () => {
+    const [messages, setMessages] = useState([]);
+
+    var pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY as string, {
+        cluster: 'eu'
+    });
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function (data: any) {
+        alert(JSON.stringify(data));
+    });
     return (
         <div className="overflow-auto w-full flex flex-col gap-4 p-4">
-            <Message props={{
+            {messages.map((msg, index) => (
+                <div key={index}>{msg}</div>
+            ))}
+            {/* <Message props={{
                 id: 0,
                 content: "Тексты текста текст321321312312",
                 date: '2014-04-23T09:54:51',
@@ -90,7 +105,7 @@ const Messages = () => {
                 date: '2014-04-23T09:54:51',
                 avatar: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg',
                 imageUrl: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg'
-            }} />
+            }} /> */}
         </div>
     )
 }

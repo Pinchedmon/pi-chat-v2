@@ -1,7 +1,4 @@
-import Post from "@/components/Post";
 import { fetcher } from "@/lib/fetcher";
-import { useSearchParams } from "next/navigation";
-import useSWR from "swr";
 import { group } from "@/utils/types/group";
 import Group from "./Group";
 import { useEffect, useState } from "react";
@@ -41,7 +38,9 @@ const GroupWall = (props: PostsWall) => {
         revalidateOnReconnect: false,
     });
 
-
+    useEffect(() => {
+        setPage(1)
+    }, [props.allStatus])
 
     if (error) {
         return <div>Error loading posts!</div>;
@@ -52,24 +51,28 @@ const GroupWall = (props: PostsWall) => {
 
     const groups = data.flatMap(response => response.groups);
 
-
     return (
-        <div className="columns md:w-4/5 pb-[60px]">
+        <div className="columns md:w-4/5 pb-[100px]">
             {groups.map((group: group) => (
                 <Group key={group.id} group={group} userId={props.id} />
             ))}
             {!groups || groups.length == 0 && <p className="text-center mt-[22px]">Нет постов</p>}
-            <button onClick={() => {
-                setPage(page + 1);
-                setSize(size + 1)
-                mutate()
-            }}>Next Page</button>
-            {page > 1 &&
-                <button onClick={() => {
-                    setPage(page - 1);
-                    setSize(size - 1)
+            {groups.length == 10 && <button
+                className="border border-green rounded-xl p-2"
+                onClick={() => {
+                    setPage(page + 1);
+                    setSize(page)
                     mutate()
-                }}>Previous Page</button>
+                }}>Следующая стр.</button>
+            }
+            {page > 1 &&
+                <button
+                    className="border border-green rounded-xl p-2"
+                    onClick={() => {
+                        setPage(page - 1);
+                        setSize(page)
+                        mutate()
+                    }}>Предущая стр.</button>
             }
         </div>
     );

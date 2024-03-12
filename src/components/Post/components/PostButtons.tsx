@@ -2,6 +2,7 @@
 
 import CommentIcon from "@/components/buttons/CommentButton/CommentIcon";
 import LikeIcon from "@/components/buttons/LikeButton/LikeIcon";
+import { useAppSelector } from "@/lib/hooks";
 import axios from "axios";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useSWRConfig } from "swr";
@@ -19,21 +20,27 @@ const PostButtons = ((props: Props) => {
     const pathname = usePathname();
     const groupid = useSearchParams().get('id');
     const { likes, comments, id, userId } = props;
+    const { mutate: mutatePosts } = useAppSelector((state) => state.postsWall)
+    mutatePosts && mutatePosts()
     const handleLike = async () => {
         await axios.post(`/api/post/like`, { postId: id, userId: userId })
             .then(response => {
                 switch (pathname) {
                     case '/post': {
                         mutate(`/api/post/${id}`)
+                        mutatePosts && mutatePosts()
                     }
                     case '/posts': {
                         mutate(`/api/posts/${userId}?filter=wall`)
+                        mutatePosts && mutatePosts()
                     }
                     case '/group': {
                         mutate(`/api/posts/${groupid}?filter=group`)
+                        mutatePosts && mutatePosts()
                     }
                     case '/profile': {
                         mutate(`/api/posts/${userId}?filter=profile`)
+                        mutatePosts && mutatePosts()
                     }
                 }
             })

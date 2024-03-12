@@ -1,14 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import signupReducer  from './features/auth/signupSlice';
 import signipReducer  from './features/auth/signinSlice';
-
+import postsWallReducer  from './features/posts/PostsWallSlice';
 
 
 
 export const store = configureStore({
   reducer: {
     signup: signupReducer,
-    signin: signipReducer
+    signin: signipReducer,
+    postsWall: postsWallReducer
   },
 });
 

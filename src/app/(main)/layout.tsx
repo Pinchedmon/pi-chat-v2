@@ -22,7 +22,9 @@ const AuthLayout = ({
                 <div className='flex  overflow-y-auto  md:pr-[30px] pb-[70px] md:pb-[0px] w-full'>
                     <div className='w-full  flex flex-col'>
                         <div className='flex z-[80] sticky mt-[7px] top-[7px] md:top-[30px] md:mt-[30px] justify-between'>
-                            <SearchBar />
+
+                            {/* //TODO: not in cursovaya  */}
+                            {/* <SearchBar /> */}
                             <MobileHeader />
                             <NotificationsButton />
                         </div>

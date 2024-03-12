@@ -33,6 +33,7 @@ const ProfilePage = () => {
     const mutateData = (profileData: any, userData: any) => {
         mutate({ profile: { ...data.profile, profileData }, user: { ...data.user, userData } })
     }
+    console.log(data)
     return (
         <div>
             {data.profile &&

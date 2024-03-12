@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/lib/hooks";
 import axios from "axios";
 import { useSearchParams } from "next/navigation"
 import { useState } from "react";
@@ -8,6 +9,8 @@ const AddPostForm = (props: { id: string, filter: string, search: string }) => {
     const searchParams = useSearchParams()
     const { mutate } = useSWRConfig();
     const [content, setContent] = useState('');
+    const { mutate: mutatePosts } = useAppSelector((state) => state.postsWall)
+    mutatePosts && mutatePosts()
     const handleSend = async () => {
         if (!content || !props.id) {
             return;
@@ -18,6 +21,7 @@ const AddPostForm = (props: { id: string, filter: string, search: string }) => {
         }).then(res => {
             if (res.status == 201) {
                 mutate(`/api/posts/${props.id}?filter=${props.filter ? props.filter : props.search}`)
+                mutatePosts && mutatePosts()
                 setContent('')
             }
         })

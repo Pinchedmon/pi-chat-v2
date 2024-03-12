@@ -5,8 +5,8 @@ import useModal from "@/hooks/useModal";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
 import { useSWRConfig } from "swr";
+import { useAppSelector } from "@/lib/hooks";
 const PostEdit = (props: { id: number | undefined, data: { content: string, img: string } }) => {
     const { mutate } = useSWRConfig();
     const { isModalOpen, openModal, closeModal } = useModal();
@@ -14,6 +14,9 @@ const PostEdit = (props: { id: number | undefined, data: { content: string, img:
     const session = useSession();
     const router = useRouter();
     const pathname = usePathname();
+
+    const { mutate: mutatePosts } = useAppSelector((state) => state.postsWall)
+
     const handleDelete = async () => {
         await axios.delete('/api/post/delete', {
             data: {
@@ -26,9 +29,11 @@ const PostEdit = (props: { id: number | undefined, data: { content: string, img:
                 }
                 case '/posts': {
                     mutate(`/api/posts/${session.data?.user.id}`)
+                    mutatePosts && mutatePosts()
                 }
                 case '/group': {
                     mutate(`/api/posts/${id}?filter=group`)
+                    mutatePosts && mutatePosts()
                 }
             }
 
@@ -38,12 +43,15 @@ const PostEdit = (props: { id: number | undefined, data: { content: string, img:
         switch (pathname) {
             case '/post': {
                 mutate(`/api/post/${props.id}`)
+                mutatePosts && mutatePosts()
             }
             case '/posts': {
                 mutate(`/api/posts/${session.data?.user.id}`)
+                mutatePosts && mutatePosts()
             }
             case '/group': {
                 mutate(`/api/posts/${id}?filter=group`)
+                mutatePosts && mutatePosts()
             }
         }
 

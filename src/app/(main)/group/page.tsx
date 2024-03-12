@@ -14,6 +14,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { useState } from "react"
 import axios from "axios"
 import FollowButton from "./components/followButton"
+import { useAppSelector } from "@/lib/hooks"
 
 const GroupPage = () => {
     const { isModalOpen, openModal, closeModal } = useModal();
@@ -21,6 +22,7 @@ const GroupPage = () => {
     const session = useSession();
     const { data, error } = useSWR(`/api/group?id=${id}`, fetcher);
     const [content, setContent] = useState<string>('')
+    const { mutate: mutatePosts } = useAppSelector((state) => state.postsWall)
     const handleSend = async () => {
         if (!content || !id) {
             return;
@@ -31,6 +33,7 @@ const GroupPage = () => {
         }).then(res => {
             if (res.status == 201) {
                 mutate(`/api/posts/${id}?filter=group`)
+                mutatePosts && mutatePosts()
                 setContent('')
             }
         })
@@ -40,16 +43,19 @@ const GroupPage = () => {
     const refetch = () => {
         mutate(`/api/group?id=${id}`)
         mutate(`/api/posts/${id}?filter=group`)
+        mutatePosts && mutatePosts()
     }
-
 
     if (error) {
         return <div>Error loading posts!</div>;
     }
+
     if (!data || !id) {
         return <div>Loading groups...</div>;
     }
+
     const { group } = data
+
     return (
         <section>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
@@ -92,7 +98,9 @@ const GroupPage = () => {
                 </button>
             </div>
             }
+
             <GroupPosts id={id} />
+
         </section >
     )
 }
