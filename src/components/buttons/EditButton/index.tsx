@@ -48,7 +48,7 @@ const EditButton = (props: svgProps) => {
             {isHovering &&
                 <>
                     {option === EditOption.POST && <PostEdit id={id} data={data} />}
-                    {option === EditOption.PROFILE && <ProfileEdit />}
+                    {option === EditOption.PROFILE && <ProfileEdit openModal={openModal as () => void} />}
                     {option === EditOption.MYPROFILE && <MyProfileEdit openModal={openModal as () => void} />}
                     {option === EditOption.COMMENT && <CommentEdit id={id} data={data} />}
                     {option === EditOption.DIALOG && <DialogEdit />}

@@ -1,7 +1,21 @@
 export type dialog = {
-    userId: number;
-    content: string;
-    author: string;
-    imageUrl?: string;
-    date: string;
+    id: number;
+    name: string;
+    img: string;
+    participants: {
+        id: string,
+        username: string,
+        avatar: string
+    }
+}
+
+export type dialogData = {
+    id: number;
+    name: string;
+    img: string;
+    participants: [{
+        id: string,
+        username: string,
+        avatar: string
+    }]
 }

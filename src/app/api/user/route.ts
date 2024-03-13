@@ -32,7 +32,8 @@ export async function POST(req: Request) {
             data: {
                 username,
                 tag,
-                password: hashedPassword
+                password: hashedPassword,
+                avatar: 'https://i.pinimg.com/564x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg'
             }
         })
          await db.profile.create({

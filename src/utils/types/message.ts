@@ -1,7 +1,8 @@
 export type message = {
+    chatId: number;
     id: number;
     content: string;
-    date: string;
-    avatar?: string;
-    imageUrl?: string;
+    createdAt: string;
+    img: string;
+    senderId: string
 }

@@ -7,7 +7,6 @@ const myProfileEdit = (props: { openModal: () => void }) => (
                 </svg>
                 <p> Изменить </p>
             </button>
-
         </div>
     </div >
 )

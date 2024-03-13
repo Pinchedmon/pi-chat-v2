@@ -14,6 +14,7 @@ import ProfileUsername from '@/app/(main)/profile/components/profile/ProfileUser
 import AddFriendButton from '@/app/(main)/profile/components/profile/AddFriendButton'
 import ProfileBio from '@/app/(main)/profile/components/profile/ProfileBio'
 import PostsWall, { PostsType, SearchType } from '@/widgets/main/PostsWall'
+import SendMessageForm from '@/components/forms/SendMessageForm'
 
 const ProfilePage = () => {
     const { isModalOpen, openModal, closeModal } = useModal();
@@ -38,9 +39,17 @@ const ProfilePage = () => {
         <div>
             {data.profile &&
                 <>
+
+
                     <Modal isOpen={isModalOpen} onClose={closeModal}>
-                        <ProfileForm id={id} mutate={mutateData} data={{ ...data.profile, ...data.user }} onClose={closeModal} />
+                        {
+                            session.data?.user.id !== id ?
+                                <SendMessageForm id={id} userId={session.data?.user.id as string} onClose={closeModal} /> :
+                                <ProfileForm id={id} mutate={mutateData} data={{ ...data.profile, ...data.user }} onClose={closeModal} />
+                        }
                     </Modal>
+
+
                     <div className='bg-cover bg-center w-full mt-[10px] h-[150px] flex flex-col-reverse rounded-[20px]  bg-bg-content dark:bg-dark-bg-content'
                         style={{ backgroundImage: data.profile?.backImage ? `url(${data.profile.backImage})` : '' }}>
                         <p className="p-3 text-[20px] font-bold">Профиль</p>

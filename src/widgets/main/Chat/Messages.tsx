@@ -1,14 +1,13 @@
+import { fetcher } from "@/lib/fetcher";
 import { message } from "@/utils/types/message";
 import moment from "moment";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Pusher from "pusher-js"
-import { useState, useEffect } from "react";
-
-
-const id = '1';
+import { useState } from "react";
+import useSWRInfinite from "swr/infinite";
 
 const Message = ({ props }: { props: message }) => {
-
     return (
         <>
             {props.id
@@ -19,21 +18,21 @@ const Message = ({ props }: { props: message }) => {
                     </p>
 
                     <p className="mr-auto text-sm text-gray-text">
-                        {moment(props.date).format("HH:mm")}
+                        {moment(props.createdAt).format("HH:mm")}
                     </p>
                 </div>
 
                 :
                 <div className="flex w-full">
                     <div className="mr-4">
-                        <Image src={props.imageUrl as string} width={44} height={44} alt={"profile"}
+                        <Image src={props.img as string} width={44} height={44} alt={"profile"}
                             className=" rounded-[20px]" />
                     </div>
                     <div>
                         <div className="mb-4 bg-bg-content dark:bg-dark-bg-content rounded-[50px] p-3 ">
                             <p className="text-sm">{props.content}</p>
                         </div>
-                        <Image src={props.imageUrl as string}
+                        <Image src={props.img as string}
                             alt={''}
                             width="0"
                             height="0"
@@ -41,7 +40,7 @@ const Message = ({ props }: { props: message }) => {
                             className="w-[200px] h-auto p-2s rounded-[20px]" />
                     </div>
                     <p className="ml-auto text-sm text-gray-text">
-                        {moment(props.date).format("HH:mm")}
+                        {moment(props.createdAt).format("HH:mm")}
                     </p>
                 </div>
             }
@@ -50,62 +49,44 @@ const Message = ({ props }: { props: message }) => {
     )
 }
 const Messages = () => {
+    const session = useSession()
+    const [page, setPage] = useState(1);
+    const userId = session.data?.user.id;
+    const getKey = (pageIndex: number) => {
+        const baseUrl = `/api/chat/getChat`;
+        const queryParams = new URLSearchParams();
+        queryParams.append('id', userId as string);
+        queryParams.append('page', String(pageIndex + page));
+        return `${baseUrl}?${queryParams.toString()}`;
+    };
     const [messages, setMessages] = useState([]);
-
+    const { data, error, mutate, size, setSize } = useSWRInfinite(getKey, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    });
     var pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY as string, {
         cluster: 'eu'
     });
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function (data: any) {
-        alert(JSON.stringify(data));
+    var channel = pusher.subscribe('chat');
+    channel.bind('hello', function (data: any) {
+        const parsedComments = JSON.parse(data.msgs);
+        setMessages((prev) => [...prev, parsedComments] as any)
     });
+
+    if (error) return <div>ошибка загрузки</div>
+
+    if (!data || !userId) {
+        return <div>Loading groups...</div>;
+    }
+    const msgs = data.flatMap(response => response.msgs.messages);
     return (
         <div className="overflow-auto w-full flex flex-col gap-4 p-4">
-            {messages.map((msg, index) => (
-                <div key={index}>{msg}</div>
+            {msgs[0] && msgs.map((message: message) => (
+                <Message key={message.id} props={message} />
             ))}
-            {/* <Message props={{
-                id: 0,
-                content: "Тексты текста текст321321312312",
-                date: '2014-04-23T09:54:51',
-                avatar: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg',
-                imageUrl: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg'
-            }} />
-            <Message props={{
-                id: 1,
-                content: "Тексты текста текст",
-                date: '2014-04-23T09:54:51',
-                avatar: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg',
-                imageUrl: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg'
-            }} />
-            <Message props={{
-                id: 0,
-                content: "Тексты текста текст321321312312",
-                date: '2014-04-23T09:54:51',
-                avatar: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg',
-                imageUrl: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg'
-            }} />
-            <Message props={{
-                id: 1,
-                content: "Тексты текста текст",
-                date: '2014-04-23T09:54:51',
-                avatar: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg',
-                imageUrl: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg'
-            }} />
-            <Message props={{
-                id: 0,
-                content: "Тексты текста текст321321312312",
-                date: '2014-04-23T09:54:51',
-                avatar: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg',
-                imageUrl: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg'
-            }} />
-            <Message props={{
-                id: 1,
-                content: "Тексты текста текст",
-                date: '2014-04-23T09:54:51',
-                avatar: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg',
-                imageUrl: 'https://i.pinimg.com/564x/4e/a0/00/4ea000823256d5d66d6c56e4eef78a2a.jpg'
-            }} /> */}
+            {!msgs[0] && <p className="text-center mt-[22px]">Нет постов</p>}
+
         </div>
     )
 }

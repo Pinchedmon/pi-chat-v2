@@ -10,14 +10,20 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 
 const SendMessageArea = () => {
-    // const session = useSession()
-    // const id = useSearchParams().get('id');
-    const [message, setMessage] = useState('');
 
+    const session = useSession()
+    const senderId = session.data?.user.id
+    const id = useSearchParams().get('id');
+    const [message, setMessage] = useState('');
+    const sendMessage = async () => {
+        await axios.post(`/api/chat/postMsg`, {
+            content: message, chatId: id, senderId, img: ''
+        })
+    }
     // const { mutate } = useSWRConfig();
     // const [content, setContent] = useState('');
     // const pathname = usePathname()
-    // const handleSend = async () => {
+    // const handleSend = asyc () => {
     //     if (!content) {
     //         return;
     //     }
@@ -39,7 +45,7 @@ const SendMessageArea = () => {
             <TextareaAutosize value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder='Отправить сообщение' maxRows={3} className='w-full border-2 border-gray-300 px-4 py-2  rounded-[20px]' style={{ resize: 'none' }} />
-            <SendButton width={24} height={24} onClick={() => 1} />
+            <SendButton width={24} height={24} onClick={sendMessage} />
         </div>
     )
 }
