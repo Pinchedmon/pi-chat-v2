@@ -13,7 +13,7 @@ const ChatPage = () => {
                 <p> Диалоги </p>
             </div>
             <div>
-                <SelectedDialog />
+                {id && <SelectedDialog />}
             </div>
             <div className={`${id && 'hidden md:block'} md:static z-0 overflow-auto bg-bg-content p-2 dark:bg-dark-bg-content rounded-[20px]`}>
                 <Dialogs />

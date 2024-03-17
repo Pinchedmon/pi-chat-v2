@@ -1,26 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface selectedDialogState {
-    username: string;
-    avatar: string;
+  
+    mutate?: () => void;
+    mutateDialogs?: () => void;
 }
 
 const initialState: selectedDialogState = {
-  username: '',
-  avatar: ''
+  
 }
 
 export const selectedDialogSlice = createSlice({
   name: 'postsWall',
   initialState,
   reducers: {
-    setDialog: (state, action: PayloadAction<selectedDialogState>)  => {
-      state.username = action.payload.username;
-      state.avatar = action.payload.avatar;
+    setMutate: (state, action: PayloadAction<() => void>)=> {
+      state.mutate = action.payload
     },
+    setMutateDialogs: (state, action: PayloadAction<() => void>)=> {
+      state.mutateDialogs = action.payload
+    }
   }
 })
 
-export const {setDialog } = selectedDialogSlice.actions
+export const {setMutate, setMutateDialogs } = selectedDialogSlice.actions
 
 export default selectedDialogSlice.reducer

@@ -2,12 +2,10 @@
 
 import React, { useState } from 'react'
 import Follow from './Follow'
-import useSWR from 'swr'
 import { fetcher } from '@/lib/fetcher'
 import { useSession } from 'next-auth/react'
 import { follow } from "@/utils/types/follow";
 import useSWRInfinite from 'swr/infinite'
-
 
 export interface FollowsWall {
     allStatus: boolean;
@@ -18,28 +16,20 @@ const FollowWall = (props: FollowsWall) => {
     const [page, setPage] = useState(1);
     const session = useSession()
     const userId = session.data?.user.id
-    console.log()
 
     const getKey = (pageIndex: number) => {
         const baseUrl = `/api/follows`;
         const queryParams = new URLSearchParams();
 
-
-        // if (!props.allStatus) {
-        //     queryParams.append('id', userId as string);
-        // }
-
         if (props.search) {
             queryParams.append('search', props.search);
         }
+
         queryParams.append('id', userId as string);
         queryParams.append('page', String(pageIndex + page));
 
         return `${baseUrl}?${queryParams.toString()}`;
     };
-
-
-    // const { data, isLoading, error } = useSWR(`/api/follows?id=${session.data?.user.id}`, fetcher)
 
     const { data, error, isLoading, mutate, size, setSize } = useSWRInfinite(getKey, fetcher, {
         revalidateIfStale: false,
@@ -54,7 +44,7 @@ const FollowWall = (props: FollowsWall) => {
     }
 
     const follows = data.flatMap(response => response.follows);
-    console.log(follows)
+
     return (
         <div className="columns md:w-4/5">
             {follows[0] && follows.map((follow: follow) => (

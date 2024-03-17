@@ -26,7 +26,7 @@ const AuthLayout = ({
                             {/* //TODO: not in cursovaya  */}
                             {/* <SearchBar /> */}
                             <MobileHeader />
-                            <NotificationsButton />
+                            {/* <NotificationsButton /> */}
                         </div>
                         <RequireAuth>
                             {children}

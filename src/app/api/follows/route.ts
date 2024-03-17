@@ -7,7 +7,7 @@ export async function GET(req: Request) {
     const id = searchParams.get('id');
     const search = searchParams.get('search');
     const page = parseInt(searchParams.get('page') as string) || 1; 
-    console.log(id)
+
     if (typeof id !== 'string' || !Number.isInteger(Number(id))) {
       return NextResponse.json({ message: "Invalid user ID" }, { status: 400 });
     }

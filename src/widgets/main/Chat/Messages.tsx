@@ -1,91 +1,101 @@
+import { setMutate } from "@/lib/features/chat/SelectedDialog";
 import { fetcher } from "@/lib/fetcher";
+import { useAppDispatch } from "@/lib/hooks";
 import { message } from "@/utils/types/message";
-import moment from "moment";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import Pusher from "pusher-js"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSWRInfinite from "swr/infinite";
+import Message from "./Message";
 
-const Message = ({ props }: { props: message }) => {
-    return (
-        <>
-            {props.id
-                ?
-                <div className="flex flex-row-reverse ">
-                    <p className="mb-4 bg-bg-content dark:bg-dark-bg-content rounded-[50px] p-3 text-sm">
-                        {props.content}
-                    </p>
-
-                    <p className="mr-auto text-sm text-gray-text">
-                        {moment(props.createdAt).format("HH:mm")}
-                    </p>
-                </div>
-
-                :
-                <div className="flex w-full">
-                    <div className="mr-4">
-                        <Image src={props.img as string} width={44} height={44} alt={"profile"}
-                            className=" rounded-[20px]" />
-                    </div>
-                    <div>
-                        <div className="mb-4 bg-bg-content dark:bg-dark-bg-content rounded-[50px] p-3 ">
-                            <p className="text-sm">{props.content}</p>
-                        </div>
-                        <Image src={props.img as string}
-                            alt={''}
-                            width="0"
-                            height="0"
-                            sizes="100vw"
-                            className="w-[200px] h-auto p-2s rounded-[20px]" />
-                    </div>
-                    <p className="ml-auto text-sm text-gray-text">
-                        {moment(props.createdAt).format("HH:mm")}
-                    </p>
-                </div>
-            }
-        </>
-
-    )
-}
 const Messages = () => {
     const session = useSession()
     const [page, setPage] = useState(1);
     const userId = session.data?.user.id;
-    const getKey = (pageIndex: number) => {
+    const chatId = useSearchParams().get('id');
+    const getKey = () => {
         const baseUrl = `/api/chat/getChat`;
         const queryParams = new URLSearchParams();
-        queryParams.append('id', userId as string);
-        queryParams.append('page', String(pageIndex + page));
+        queryParams.append('id', chatId as string);
+        queryParams.append('page', String(page));
         return `${baseUrl}?${queryParams.toString()}`;
     };
-    const [messages, setMessages] = useState([]);
+    const router = useRouter();
+    const [messages, setMessages] = useState<any>([]);
+
     const { data, error, mutate, size, setSize } = useSWRInfinite(getKey, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     });
-    var pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY as string, {
-        cluster: 'eu'
-    });
-    var channel = pusher.subscribe('chat');
-    channel.bind('hello', function (data: any) {
-        const parsedComments = JSON.parse(data.msgs);
-        setMessages((prev) => [...prev, parsedComments] as any)
-    });
+
+    console.log(data)
+    const dispatch = useAppDispatch()
+    dispatch(setMutate(mutate))
+
+    useEffect(() => {
+        if (data !== undefined && data.length > 0) {
+            setMessages((prevMessages: any) => {
+                return [
+                    ...data.flatMap((response) =>
+                        response.msgs?.length !== 0 && response.msgs[0]?.messages.length !== 0
+                            ? response.msgs[0].messages
+                            : []
+                    ),
+                    ...prevMessages,
+                ];
+            });
+        }
+    }, [data]);
+
+    useEffect(() => {
+        const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY as string, {
+            cluster: 'eu',
+        });
+        const channel = pusher.subscribe('chat');
+        channel.bind('new_message', function (data: any) {
+            setMessages((msgs: any) => [...msgs, data.message])
+        });
+
+        return () => {
+            channel.unbind('new_message');
+            channel.unsubscribe();
+            pusher.disconnect();
+        };
+    }, []);
 
     if (error) return <div>ошибка загрузки</div>
 
-    if (!data || !userId) {
+    if (!messages || !userId) {
         return <div>Loading groups...</div>;
     }
-    const msgs = data.flatMap(response => response.msgs.messages);
+
+
+
+
     return (
         <div className="overflow-auto w-full flex flex-col gap-4 p-4">
-            {msgs[0] && msgs.map((message: message) => (
+            {messages > 0 && data && messages.length > 10 && data.flatMap((response) => {
+                if (response.msgs?.length > 0 && response.msgs[0]?.messages?.length > 0) {
+                    return response.msgs[0].messages;
+                } else {
+                    return [];
+                }
+            }).length > 0 &&
+                <button
+                    className="border border-green rounded-xl p-2"
+                    onClick={() => {
+                        setPage(page + 1);
+                        setSize(page)
+                        mutate()
+                    }}>Ещё</button>
+            }
+
+            {messages[0] && messages.map((message: message) => (
                 <Message key={message.id} props={message} />
             ))}
-            {!msgs[0] && <p className="text-center mt-[22px]">Нет постов</p>}
+            {!messages[0] && <p className="text-center mt-[22px]">Нет сообщений</p>}
 
         </div>
     )

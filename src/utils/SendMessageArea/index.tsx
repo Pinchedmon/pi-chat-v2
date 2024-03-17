@@ -2,44 +2,25 @@
 
 import TextareaAutosize from 'react-textarea-autosize';
 import SendButton from './SendButton';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useSWRConfig } from 'swr';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import { fetcher } from '@/lib/fetcher';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 
 const SendMessageArea = () => {
-
     const session = useSession()
     const senderId = session.data?.user.id
-    const id = useSearchParams().get('id');
+    const chatId = useSearchParams().get('id');
     const [message, setMessage] = useState('');
+
     const sendMessage = async () => {
         await axios.post(`/api/chat/postMsg`, {
-            content: message, chatId: id, senderId, img: ''
+            content: message, chatId, senderId: senderId as string, img: ''
+        }).then(() => {
+            setMessage('')
         })
     }
-    // const { mutate } = useSWRConfig();
-    // const [content, setContent] = useState('');
-    // const pathname = usePathname()
-    // const handleSend = asyc () => {
-    //     if (!content) {
-    //         return;
-    //     }
-    //     console.log(pathname)
-    //     if (pathname == '/post')
-    //         await axios.post('/api/comment/add', {
-    //             authorId: session.data?.user.id,
-    //             content: content,
-    //             postId: id
-    //         }).then(res => {
-    //             if (res.status == 201) {
-    //                 mutate(`/api/post/${id}`, fetcher(`/api/post/${id}`))
-    //                 setContent('')
-    //             }
-    //         })
-    // }
+
     return (
         <div className='flex  gap-4 mt-[10px] mx-4 md:mx-4'>
             <TextareaAutosize value={message}
