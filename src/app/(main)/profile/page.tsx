@@ -28,22 +28,20 @@ const ProfilePage = () => {
     if (!id) {
         return router.push(`/profile${session.data?.user.id}`)
     }
-    if (!data) {
+    if (!data && !session.data) {
         return <div>Loading...</div>;
     }
     const mutateData = (profileData: any, userData: any) => {
         mutate({ profile: { ...data.profile, profileData }, user: { ...data.user, userData } })
     }
-    console.log(data)
+    console.log(session.data)
     return (
         <div>
-            {data.profile &&
+            {data &&
                 <>
-
-
                     <Modal isOpen={isModalOpen} onClose={closeModal}>
                         {
-                            session.data?.user.id !== id ?
+                            session.data?.user.id !== id && !session.data?.user.isAdmin ?
                                 <SendMessageForm id={id} userId={session.data?.user.id as string} onClose={closeModal} /> :
                                 <ProfileForm id={id} mutate={mutateData} data={{ ...data.profile, ...data.user }} onClose={closeModal} />
                         }
@@ -63,7 +61,7 @@ const ProfilePage = () => {
                                 <ProfileTag tag={data.user.tag} />
                             </div>
                         </div>
-                        <EditIcon openModal={openModal} widthIcon={26} widthButton={42} fill={'#b5b5b5'} option={session.data?.user.id !== id ? EditOption.PROFILE : EditOption.MYPROFILE} />
+                        <EditIcon openModal={openModal} widthIcon={26} widthButton={42} fill={'#b5b5b5'} option={(session.data?.user.id !== id) ? EditOption.PROFILE : EditOption.MYPROFILE} />
                     </div>
                     {
                         session.data?.user.id !== id && <AddFriendButton id={id} userId={session.data?.user.id as string} />

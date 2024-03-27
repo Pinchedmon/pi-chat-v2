@@ -8,6 +8,7 @@ import { fetcher } from "@/lib/fetcher"
 import { redirect, useSearchParams } from "next/navigation"
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import SendMessageArea from "./components/Comment/SendCommentArea";
 const PostPage = () => {
     const id = useSearchParams().get('id');
     const session = useSession();
@@ -31,7 +32,7 @@ const PostPage = () => {
                             <p className="text-center mt-[22px]">Нет постов</p>
                         }
                         <div className=" fixed md:sticky bottom-[70px] md:bottom-0 w-full p-2">
-                            <Chatarea type={"post"} userId={session.data.user.id} />
+                            <SendMessageArea type={"post"} userId={session.data.user.id} />
                         </div>
 
                     </div>

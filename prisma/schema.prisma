@@ -17,11 +17,12 @@ model User {
   follows   Int[]    
   chats     Chat[]    @relation("UserChat")
   messages  Message[] 
-  myGroups     Group[] 
+  myGroups  Group[] 
   groups    Group[]   @relation("Membership")
   profile   Profile?
   comments  Comment[]  @relation("UserComments")
-  postLikes   PostLike[]
+  postLikes PostLike[] 
+  isAdmin   Boolean   @default(false)
 }
 
 model Post {

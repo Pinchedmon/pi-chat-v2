@@ -21,7 +21,7 @@ const Group = ({ group, userId }: { group: group, userId: number | string; }) =>
                 </div>
             </Link>
             <div className="flex items-center">
-                <EditButton widthIcon={26} widthButton={42} fill={"#b5b5b5"} option={EditOption.GROUP} />
+                {/* <EditButton widthIcon={26} widthButton={42} fill={"#b5b5b5"} option={EditOption.GROUP} /> */}
             </div>
         </article>)
 }

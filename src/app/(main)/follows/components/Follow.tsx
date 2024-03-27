@@ -18,9 +18,9 @@ const Follow = ({ props }: { props: follow }) => {
                     </p>
                 </div>
             </Link>
-            <button className="flex items-center md:mr-4 ">
+            {/* <button className="flex items-center md:mr-4 ">
                 <p className=" border px-2 md:px-4  py-2 rounded-[20px] border-green text-[12px] md:text-[14px]">Написать </p>
-            </button>
+            </button> */}
             <div className="flex items-center  ">
                 <EditButton widthIcon={26} widthButton={42} fill={"#b5b5b5"} option={EditOption.FRIEND} data={props.id} />
             </div>

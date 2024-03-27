@@ -5,17 +5,20 @@ declare module "next-auth" {
     id: string,
     username: string;
     tag: string;
+    isAdmin: boolean
   }
   interface Session {
     user: User &{
       id: string,
       username: string
       tag: string
+      isAdmin: boolean
     }
     token: {
       id: string,
         username: string
         tag: string
+        isAdmin: boolean
     }
   }
 }

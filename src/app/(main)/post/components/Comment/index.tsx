@@ -1,11 +1,13 @@
 import EditButton from "@/components/buttons/EditButton"
 import { comment } from "@/utils/types/comment"
 import { EditOption } from "@/utils/types/editButton"
+import { useSession } from "next-auth/react"
 import Image from "next/image"
 interface CommentProps {
     comment: comment
 }
 const Comment = (props: CommentProps) => {
+    const session = useSession()
     return (
         <>
             {props &&
@@ -28,9 +30,11 @@ const Comment = (props: CommentProps) => {
                                 <Image src={props.comment.img} alt={""} width={200} height={200} />
                             </div>}
                     </div>
-                    <div className="">
-                        <EditButton option={EditOption.COMMENT} widthIcon={26} widthButton={42} fill={"#b5b5b5"} data={{ content: props.comment.content, img: props.comment.img }} id={props.comment.id} />
-                    </div>
+                    {((props.comment.author.id == session.data?.user.id) || session.data?.user.isAdmin) &&
+                        <div className="">
+                            <EditButton option={EditOption.COMMENT} widthIcon={26} widthButton={42} fill={"#b5b5b5"} data={{ content: props.comment.content, img: props.comment.img }} id={props.comment.id} />
+                        </div>
+                    }
                 </article>
             }
         </>

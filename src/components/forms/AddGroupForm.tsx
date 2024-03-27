@@ -1,5 +1,6 @@
 'use client'
 
+import { useAppSelector } from '@/lib/hooks';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -16,6 +17,8 @@ const AddGroupForm = (props: {
     search: string
 }) => {
     const { mutate } = useSWRConfig()
+    const { mutate: mutateGroups } = useAppSelector((state) => state.groupWall)
+
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
         defaultValues: {
             bio: '',
@@ -24,6 +27,7 @@ const AddGroupForm = (props: {
         },
         reValidateMode: "onChange"
     })
+
     const onSubmit = async (data: IFormInput) => {
         await axios.post('/api/group/add', {
             id: props.id,
@@ -32,6 +36,7 @@ const AddGroupForm = (props: {
             name: data.name
         }).then(pr => {
             mutate(`/api/groups${!props.allStatus ? '?userId=' + props.id : ''}${props.search ? '?search=' + props.search : ''}`);
+            mutateGroups && mutateGroups();
             props.onClose();
         });
     };
@@ -39,7 +44,7 @@ const AddGroupForm = (props: {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col  bg-bg-content dark:bg-dark-bg-content'>
             <p className="text-center text-xl  font-bold mb-[12px]">
-                Cоздание поста
+                Cоздание группы
             </p>
             {errors.name && <p className='mb-2 text-red-500 text-sm'>{"Заполните поле"}</p>}
             <input

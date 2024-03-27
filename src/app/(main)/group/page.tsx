@@ -78,7 +78,7 @@ const GroupPage = () => {
 
                     </div>
                 </div>
-                {group.userId == session.data?.user.id && <EditButton openModal={openModal} widthIcon={26} widthButton={42} fill={'#b5b5b5'} option={EditOption.MYGROUP} />}
+                {(group.userId == session.data?.user.id || session.data?.user.isAdmin) && <EditButton openModal={openModal} widthIcon={26} widthButton={42} fill={'#b5b5b5'} option={EditOption.MYGROUP} />}
             </div>
             <FollowButton />
             <div className="flex text-[16px] mt-4 md:mt-6 mb-4">

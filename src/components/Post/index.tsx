@@ -12,14 +12,15 @@ import { memo } from "react"
 import PostButtons from "./components/PostButtons"
 import PostGroupImage from "./components/PostGroupImage"
 import PostGroup from "./components/PostGroup"
+import { useSession } from "next-auth/react"
 type PostProps = {
     post: post
     userId: number | string;
 
 }
 const Post = (props: PostProps) => {
+    const session = useSession()
     const { post, userId } = props
-    console.log(post)
     return (
         <article className="  flex  w-full rounded-[20px] px-2 md:px-4 py-2 md:py-4 bg-bg-content dark:bg-dark-bg-content ">
             {post.author && <PostAuthorImage image={post.author.avatar} />}
@@ -30,16 +31,16 @@ const Post = (props: PostProps) => {
                 <PostContent content={post.content} image={post.img} id={post.id} />
                 <PostButtons likes={post.likes} comments={post.comments} id={post.id} userId={userId} />
             </div>
-            {userId == post?.author?.id &&
+            {((userId == post?.author?.id || post?.group?.userId) || session.data?.user.isAdmin) &&
                 <div className=" ">
                     <EditButton option={EditOption.POST} widthIcon={26} widthButton={42} fill={"#b5b5b5"} id={post.id} data={{ content: post.content, img: post.img }} />
                 </div>
             }
-            {userId == post?.group?.userId &&
+            {/* {(userId == || session.data?.user.isAdmin) &&
                 <div className=" ">
                     <EditButton option={EditOption.POST} widthIcon={26} widthButton={42} fill={"#b5b5b5"} id={post.id} data={{ content: post.content, img: post.img }} />
                 </div>
-            }
+            } */}
         </article>
     )
 }

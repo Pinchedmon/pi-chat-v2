@@ -3,6 +3,8 @@ import { group } from "@/utils/types/group";
 import Group from "./Group";
 import { useEffect, useState } from "react";
 import useSWRInfinite from 'swr/infinite'
+import { useAppDispatch } from "@/lib/hooks";
+import { groupsWallSlice } from "@/lib/features/groups/GroupsWallSlice";
 export interface PostsWall {
     id: string;
     allStatus: boolean;
@@ -16,6 +18,7 @@ interface GroupResponse {
 
 const GroupWall = (props: PostsWall) => {
     const [page, setPage] = useState(1);
+    const dispatch = useAppDispatch();
     const getKey = (pageIndex: number) => {
         const baseUrl = '/api/groups';
         const queryParams = new URLSearchParams();
@@ -29,7 +32,7 @@ const GroupWall = (props: PostsWall) => {
         }
 
         queryParams.append('page', String(pageIndex + page));
-
+        console.log(`${baseUrl}?${queryParams.toString()}`)
         return `${baseUrl}?${queryParams.toString()}`;
     };
     const { data, error, mutate, size, setSize } = useSWRInfinite(getKey, fetcher, {
@@ -38,6 +41,11 @@ const GroupWall = (props: PostsWall) => {
         revalidateOnReconnect: false,
     });
 
+
+    dispatch(groupsWallSlice.actions.setMutate(mutate))
+    useEffect(() => {
+        mutate();
+    }, [])
     useEffect(() => {
         setPage(1)
     }, [props.allStatus])

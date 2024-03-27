@@ -45,7 +45,8 @@ export const authOptions: NextAuthOptions = {
                 return {
                     id: `${existingUser.id}`,
                     username: existingUser.username,
-                    tag: existingUser.tag
+                    tag: existingUser.tag,
+                    isAdmin: existingUser.isAdmin
                 }
             }
         })
@@ -57,7 +58,8 @@ export const authOptions: NextAuthOptions = {
                     ...token,
                     id: user.id,
                     username: user.username,
-                    tag: user.tag
+                    tag: user.tag,
+                    isAdmin: user.isAdmin
                 }
             }
             return token
@@ -69,7 +71,8 @@ export const authOptions: NextAuthOptions = {
                     ...session.user,
                     id: token.id,
                     username: token.username,
-                    tag: token.tag
+                    tag: token.tag,
+                    isAdmin: token.isAdmin
                 }
             }
           },

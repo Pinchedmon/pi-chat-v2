@@ -8,17 +8,27 @@ import { SetStateAction, useState } from "react";
 import clsx from "clsx";
 import { useDebounce } from "use-debounce";
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { useAppDispatch } from "@/lib/hooks";
+import { groupsWallSlice } from "@/lib/features/groups/GroupsWallSlice";
+import { useSWRConfig } from "swr";
 
 const GroupsPage = () => {
     const { isModalOpen, openModal, closeModal } = useModal();
     const session = useSession();
     const [allStatus, setAllStatus] = useState<boolean>(true)
     const [inputValue, setInputValue] = useState("");
+    const dispatch = useAppDispatch()
 
     const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
         setInputValue(event.target.value);
     }
 
+    const { mutate } = useSWRConfig()
+
+    const mutateAll = () => {
+        session.data && mutate(`/api/groups${!allStatus ? '?userId=' + session.data?.user.id : ''}${debouncedValue ? '?search=' + debouncedValue : ''}`);
+    }
+    dispatch(groupsWallSlice.actions.setSecMutate(mutateAll))
     const [debouncedValue] = useDebounce(inputValue, 500);
     if (!session.data) {
         return <div>Loading</div>

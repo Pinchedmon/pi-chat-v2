@@ -9,8 +9,6 @@ import DialogEdit from "./Edits/DialogEdit";
 import PostEdit from "./Edits/PostEdit";
 import GroupEdit from "./Edits/GroupEdit";
 import FriendEdit from "./Edits/FriendEdit";
-import Modal from "@/components/ui/Modal";
-import useModal from "@/hooks/useModal";
 import MyGroupEdit from "./Edits/MyGroupEdit";
 
 interface svgProps {
